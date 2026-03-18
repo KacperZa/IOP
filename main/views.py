@@ -89,3 +89,6 @@ def logout_user(request):
     logout(request)
      
     return redirect('home')
+
+def contact(request):
+    return render(request, 'main/contact.html')
