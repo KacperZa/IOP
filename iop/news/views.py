@@ -16,6 +16,9 @@ def news_create(request):
     if request.method == 'POST':
         form = ArticlesForm(request.POST)
         if form.is_valid():
+            ogloszenie = form.save(commit=False)
+            ogloszenie.autor = request.user
+            ogloszenie.save()
             form.save()
             return redirect('news_home')
         else:

@@ -1,0 +1,21 @@
+{% extends 'main/layout/layout.html' %}
+
+{% block title%}Cars{% endblock %}
+
+{% block content%}
+    <h2>News</h2>
+    <a href="{% url 'news_create' %}">Dodaj ogłoszenie</a>
+    {% for article in news %}
+    <div>
+        <h3>{{article.title}}</h3>
+        <small>{{article.published_at|date:"d.m.Y" }}</small>
+        <p>{{article.excerpt|truncatewords:10}}</p>
+        
+        
+
+    </div>
+    {% empty %}
+    <p>Brak ogłoszeń do wyświetlenia.</p>
+    {% endfor %}
+
+{% endblock %}
