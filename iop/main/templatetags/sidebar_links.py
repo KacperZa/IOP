@@ -9,15 +9,15 @@ def get_links():
         'href': '/',
         'icon': 'fa-house',
     }, {
-        'name': 'Cars',
+        'name': 'My Listings',
         'href': '/cars',
         'icon': 'fa-car',
     }, {
-        'name': 'Contact',
+        'name': 'Contact Us',
         'href': '/contact',
         'icon': 'fa-paper-plane',
     }, {
-        'name': 'About',
+        'name': 'About Us',
         'href': '/about',
         'icon': 'fa-address-card',
     },{

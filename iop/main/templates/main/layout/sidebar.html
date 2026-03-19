@@ -3,47 +3,53 @@
 
 {% get_links as links %}
 
-<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
-    <a href="/main/static" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none gap-2">
-      <img src="{% static 'main/img/django_logo.svg' %}" alt="Logo" width="40">
-      <span class="fs-4">Django app</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <div class="container-fluid">
 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Rozwiń nawigację">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="topNavbar">
+      
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 mt-2 mt-lg-0">
         {% for link in links %}
-            <li class="nav-item">
-                <a href="{{ link.href }}" class="nav-link {% if request.path == link.href %}active{% else %}text-white{% endif %}" aria-current="page">
-                    <i class="fa-solid {{ link.icon }}"></i>&nbsp;<span>{{ link.name }}</span>
-                </a>
-            </li>
+          <li class="nav-item">
+            <a href="{{ link.href }}" class="nav-link {% if request.path == link.href %}active{% endif %}" aria-current="page">
+              <i class="fa-solid {{ link.icon }}"></i>&nbsp;<span>{{ link.name }}</span>
+            </a>
+          </li>
         {% endfor %}
-        
-    </ul>
-    <hr>
-    {% if request.user.is_authenticated %}
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>{{ request.user.username }}</strong>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li>
-          <form method="POST" action="/logout">
-            {% csrf_token %}
-            <button class="dropdown-item btn btn-link" type="submit">Logout</button>
-          </form>
-        </li>
       </ul>
+
+      <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+        {% if request.user.is_authenticated %}
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle text-white d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://github.com/mdo.png" alt="Avatar" width="32" height="32" class="rounded-circle me-2">
+              <strong>{{ request.user.username }}</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form method="POST" action="/logout" class="m-0">
+                  {% csrf_token %}
+                  <button class="dropdown-item text-danger" type="submit">Logout</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        {% else %}
+          <div class="d-flex gap-2">
+            <a class="btn btn-primary" href="/login">Login</a>
+            <a class="btn btn-info text-white" href="/register">Register</a>
+          </div>
+        {% endif %}
+      </div>
+
     </div>
-    {% else %}
-    <div>
-      <a class="btn btn-primary" href="/login">Login</a>
-      <a class="btn btn-info" href="/register">Register</a>
-    </div>
-    {% endif %}
   </div>
+</nav>
