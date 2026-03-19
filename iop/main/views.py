@@ -19,7 +19,7 @@ def index(request):
 def cars(request):
     values = Articles.objects.filter(autor = request.user).order_by('-published_at')
 
-    return render(request, "main/cars.html", {'news': values})
+    return render(request, "main/ogloszenia.html", {'news': values})
 
 
 def about(request):
