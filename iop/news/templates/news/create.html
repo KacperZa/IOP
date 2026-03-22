@@ -1,0 +1,34 @@
+{% extends 'main/layout/layout.html' %}
+
+{% block title %}Dodaj ogłoszenie{% endblock %}
+
+{% block content %}
+    <h1>Dodaj nowe ogłoszenie</h1>
+    <div>
+        {# KLUCZOWE: Dodane enctype="multipart/form-data", aby zdjęcia mogły się zapisać #}
+        <form method="post" enctype="multipart/form-data" class="form d-flex flex-column gap-2">
+            {% csrf_token %}
+
+            {# Wyświetlamy podstawowe pola #}
+            {{ form.title }}
+            {{ form.excerpt }}
+            {{ form.body }}
+            
+            {# Pole ceny i kategorii #}
+            {{ form.price }}
+            {{ form.category }}
+            
+            {# NOWE POLE: Wyświetlenie okienka dodawania zdjęcia #}
+            {{ form.image }}
+
+            <span class="text-danger">
+                {{ error }}
+                {% if form.errors %}
+                    Błędnie wypełnione pola: {{ form.errors }}
+                {% endif %}
+            </span>
+
+            <button class="btn btn-success" type="submit">Opublikuj ogłoszenie</button>
+        </form>
+    </div>
+{% endblock %}

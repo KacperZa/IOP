@@ -1,0 +1,39 @@
+{% extends 'main/layout/layout.html' %}
+
+{% block title %}Ogłoszenia IOP{% endblock %}
+
+{% block content %}
+    <h1>Ogłoszenia</h1>
+    <div class="d-flex flex-column gap-4">
+    {% if news %}
+
+        {% for article in news %}
+
+            <div class="border p-3 rounded shadow-sm">
+                <h3><a href="/news/{{ article.id }}">{{ article.title }}</a></h3>
+                
+                {# WYŚWIETLANIE ZDJĘCIA #}
+                {% if article.image %}
+                    <div class="my-2">
+                        <img src="{{ article.image.url }}" alt="{{ article.title }}" style="max-width: 250px; height: auto; border-radius: 5px;">
+                    </div>
+                {% endif %}
+
+                <p>{{ article.excerpt }}</p>
+
+                {# WYŚWIETLANIE CENY I KATEGORII #}
+                <div class="mt-2">
+                    <p class="mb-1"><strong>Cena: {{ article.price }} zł</strong></p>
+                    <p class="text-muted"><small>Kategoria: {{ article.get_category_display }}</small></p>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Obecnie nie ma żadnych ogłoszeń. Wróć później!</p>
+
+    {% endif %}
+    </div>
+{% endblock %}
