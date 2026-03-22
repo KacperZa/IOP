@@ -1,14 +1,11 @@
-# Formularz z polami ceny, kategorii oraz zdjęcia
 from django import forms
 from .models import Articles
 
 class ArticlesForm(forms.ModelForm):
     class Meta:
         model = Articles
-        # Dodajemy 'image' na koniec listy pól
         fields = ['title', 'excerpt', 'body', 'price', 'category', 'image']
         
-        # Polskie nazwy wyświetlane nad okienkami
         labels = {
             'title': 'Tytuł ogłoszenia',
             'excerpt': 'Krótki opis',
@@ -19,15 +16,27 @@ class ArticlesForm(forms.ModelForm):
         }
         
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'excerpt': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={
+                'class': 'form-input', 
+                'placeholder': 'Wpisz tytuł ogłoszenia...'
+            }),
+            'excerpt': forms.TextInput(attrs={
+                'class': 'form-input', 
+                'placeholder': 'Krótki opis przedmiotu...'
+            }),
+            'body': forms.Textarea(attrs={
+                'class': 'form-textarea', 
+                'rows': 4, 
+                'placeholder': 'Podaj szczegóły oferty...'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'form-select'
+            }),
             'price': forms.NumberInput(attrs={
-                'class': 'form-control',
+                'class': 'form-input',
                 'step': '0.01',
                 'min': '0',
+                'placeholder': '0.00'
             }),
-            # Widget dla zdjęcia, aby wyglądał spójnie z resztą
-            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'id': 'id_image'}),
         }
