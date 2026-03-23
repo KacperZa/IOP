@@ -1,15 +1,42 @@
+from django import forms
 from .models import Articles
-from django.forms import ModelForm, TextInput, DateTimeInput, Textarea
 
-class ArticlesForm(ModelForm):
+class ArticlesForm(forms.ModelForm):
     class Meta:
         model = Articles
-        fields = ['title', 'excerpt', 'body', 'published_at']
-
-        # Blok widgets zajmuje się definicją pól w HTML. Tutaj można definiować typy wyświetlanych pół oraz zarządzać ich atrybutami.
+        fields = ['title', 'excerpt', 'body', 'price', 'category', 'image']
+        
+        labels = {
+            'title': 'Tytuł ogłoszenia',
+            'excerpt': 'Krótki opis',
+            'body': 'Pełny opis',
+            'price': 'Cena (zł)',
+            'category': 'Kategoria',
+            'image': 'Dodaj zdjęcie przedmiotu',
+        }
+        
         widgets = {
-            'title': TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
-            'excerpt': TextInput(attrs={'class': 'form-control', 'placeholder': 'Excerpt'}),
-            'body': Textarea(attrs={'class': 'form-control', 'placeholder': 'Article body'}),
-            'published_at': DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'Publication date'}),
+            'title': forms.TextInput(attrs={
+                'class': 'form-input', 
+                'placeholder': 'Wpisz tytuł ogłoszenia...'
+            }),
+            'excerpt': forms.TextInput(attrs={
+                'class': 'form-input', 
+                'placeholder': 'Krótki opis przedmiotu...'
+            }),
+            'body': forms.Textarea(attrs={
+                'class': 'form-textarea', 
+                'rows': 4, 
+                'placeholder': 'Podaj szczegóły oferty...'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+            'price': forms.NumberInput(attrs={
+                'class': 'form-input',
+                'step': '0.01',
+                'min': '0',
+                'placeholder': '0.00'
+            }),
+            'image': forms.FileInput(attrs={'id': 'id_image'}),
         }

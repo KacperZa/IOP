@@ -131,4 +131,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 LOGIN_URL = '/login'
+=======
+LOGIN_URL = '/login'
+
+# Ustawienia dla zdjęć w ogłoszeniach 
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+>>>>>>> 4d969f5df22628a66df89df871fc2d28fe640761

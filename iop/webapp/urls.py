@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """
 URL configuration for webapp project.
 
@@ -17,12 +18,30 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+=======
+# Główny plik URL projektu 
+from django.contrib import admin
+from django.urls import path, include
+>>>>>>> 4d969f5df22628a66df89df871fc2d28fe640761
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+<<<<<<< HEAD
     path('admin/', admin.site.urls), # default, part of django
     path('', include('main.urls')),
     path('news/', include('news.urls')), 
     path('forum/', include('forum.urls')) #delegating authority to an internal application to forum.urls that is needed to be created
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+=======
+    path('admin/', admin.site.urls),
+    path('', include('main.urls')),
+    path('news/', include('news.urls')), 
+    path('forum/', include('forum.urls')),
+]
+
+# To dodaje obsługę plików statycznych ORAZ zdjęć
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> 4d969f5df22628a66df89df871fc2d28fe640761

@@ -1,4 +1,5 @@
 {% extends 'main/layout/layout.html' %}
+<<<<<<< HEAD
 
 {% block title%}Add news{% endblock %}
 
@@ -23,4 +24,110 @@
             <button class="btn btn-success" type="submit">Add news</button>
         </form>
     </div>
+=======
+{% load static %}
+
+{% block title %}Dodaj ogłoszenie{% endblock %}
+
+{% block content %}
+<div class="listing-container">
+    <div class="listing-header">
+        <h1>Dodaj Nowe Ogłoszenie</h1>
+        <p>Wypełnij poniższe pola, aby wystawić przedmiot</p>
+    </div>
+	<style>
+    body { background-color: #0d1117; color: #ffffff; font-family: sans-serif; }
+    .listing-container { background-color: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 40px; max-width: 650px; margin: 40px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .listing-header h1 { background: linear-gradient(90deg, #ca9eff 0%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; }
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #c9d1d9; }
+    .form-input, .form-textarea, .form-select { 
+        width: 100%; background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; 
+        padding: 12px; color: #ffffff; box-sizing: border-box; 
+    }
+    .form-input:focus { border-color: #ca9eff; outline: none; box-shadow: 0 0 10px rgba(202, 158, 255, 0.4); }
+    .upload-area { border: 2px dashed #ca9eff; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    .btn-publish { 
+        width: 100%; background: linear-gradient(90deg, #ca9eff 0%, #ff1177 100%); 
+        border: none; padding: 15px; color: white; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px;
+    }
+    .icon-title { color: #ca9eff; } .icon-desc { color: #33ff99; } .icon-price { color: #ffff99; }
+</style>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.title.id_for_label }}" class="form-label">
+                <span class="material-symbols-outlined input-icon icon-title">text_fields</span>
+                Tytuł ogłoszenia
+            </label>
+            {{ form.title }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.excerpt.id_for_label }}" class="form-label">
+                <span class="material-symbols-outlined input-icon icon-desc">description</span>
+                Krótki opis
+            </label>
+            {{ form.excerpt }}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.body.id_for_label }}" class="form-label">
+                <span class="material-symbols-outlined input-icon icon-desc">notes</span>
+                Pełna treść
+            </label>
+            {{ form.body }}
+        </div>
+
+        <div style="display: flex; gap: 20px;">
+            <div class="form-group" style="flex: 1;">
+                <label for="{{ form.price.id_for_label }}" class="form-label">
+                    <span class="material-symbols-outlined input-icon icon-price">attach_money</span>
+                    Cena
+                </label>
+                {{ form.price }}
+            </div>
+
+            <div class="form-group" style="flex: 1;">
+                <label for="{{ form.category.id_for_label }}" class="form-label">
+                    <span class="material-symbols-outlined input-icon icon-category">category</span>
+                    Kategoria
+                </label>
+                {{ form.category }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">
+                <span class="material-symbols-outlined input-icon icon-image">image</span>
+                Zdjęcie przedmiotu
+            </label>
+            
+            <div class="upload-area" onclick="document.getElementById('{{ form.image.auto_id }}').click();">
+                <span class="material-symbols-outlined">cloud_upload</span>
+                <p class="upload-text">Kliknij, aby dodać zdjęcie</p>
+                <p class="upload-info">PNG, JPG up to 10MB</p>
+                <div style="display: none;">{{ form.image }}</div>
+            </div>
+        </div>
+
+        {% if form.errors or error %}
+        <div class="alert alert-danger" style="background: rgba(255,0,0,0.1); border: 1px solid red; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+            {{ error }}
+            {{ form.errors }}
+        </div>
+        {% endif %}
+
+        <button class="btn-publish" type="submit">
+            <span class="material-symbols-outlined">publish</span>
+            Opublikuj ogłoszenie
+        </button>
+    </form>
+</div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+>>>>>>> 4d969f5df22628a66df89df871fc2d28fe640761
 {% endblock %}
