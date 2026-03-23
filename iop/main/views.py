@@ -1,7 +1,7 @@
 # Plik do definiowania widoków, które są renderowane za pomocą szablonizatora Jinja oraz wyświetlane w przeglądarce
 
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages  # to show message back for errors
@@ -16,9 +16,8 @@ def index(request):
 
 
 @login_required
-def cars(request):
+def article(request):
     values = Articles.objects.filter(autor = request.user).order_by('-published_at')
-
     return render(request, "main/ogloszenia.html", {'news': values})
 
 
