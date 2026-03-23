@@ -17,8 +17,9 @@ class Articles(models.Model):
     title = models.CharField('Tytuł ogłoszenia', max_length=100, null=False, blank=False)
     excerpt = models.CharField('Krótki opis', max_length=250, null=False, blank=False)
     body = models.TextField('Pełny opis przedmiotu', null=False, blank=True)
-    published_at = models.DateTimeField('Data publikacji', auto_now_add=True) 
-    
+    published_at = models.DateTimeField('Data publikacji', auto_now_add=True)
+    views = models.PositiveIntegerField(default=0)
+        
     price = models.DecimalField(
         'Cena', 
         max_digits=10, 

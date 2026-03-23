@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
 
 from .models import Articles
 from .forms import ArticlesForm
@@ -37,6 +38,12 @@ class NewsDetailView(DetailView):
     model = Articles
     template_name = 'news/show.html'
     context_object_name = 'article'
+    
+    # Aktualizowanie wyświetleń ogłoszenia
+    def get_object(self):
+        obj = super().get_object()
+        Articles.objects.filter(pk=obj.pk).update(views=F('views') + 1)
+        return obj
 
 class NewsUpdateView(UpdateView):
     model = Articles
