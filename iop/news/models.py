@@ -47,13 +47,8 @@ class Articles(models.Model):
         return f'/news/{self.id}'
 
     class Meta:
-<<<<<<< HEAD
-        verbose_name = 'Article'
-        verbose_name_plural = 'Articles'
-=======
         verbose_name = 'Ogłoszenie'
         verbose_name_plural = 'Ogłoszenia'
 
     def __str__(self):
         return self.title
->>>>>>> 4d969f5df22628a66df89df871fc2d28fe640761
