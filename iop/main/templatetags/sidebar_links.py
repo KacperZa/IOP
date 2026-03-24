@@ -13,23 +13,23 @@ def get_links():
         'href': '/cars',
         'icon': 'fa-car',
     }, {
-        'name': 'Contact Us',
+        'name': '?',
         'href': '/contact',
         'icon': 'fa-paper-plane',
     }, {
-        'name': 'About Us',
+        'name': '?',
         'href': '/about',
         'icon': 'fa-address-card',
     },{
-        'name': 'News',
+        'name': 'New Listings',
         'href': '/news/',
         'icon': 'fa-newspaper',
     },{
-        'name': 'Add news',
+        'name': 'Add Listing',
         'href': '/news/create',
         'icon': 'fa-plus',
     },{
-        'name': 'Forum',
+        'name': '?',
         'href': '/forum',
         'icon': 'fa-comment', #look for your icon here https://fontawesome.com/search?ic=free
     }]
