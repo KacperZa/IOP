@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('news/', include('news.urls')), 
     path('forum/', include('forum.urls')),
+    path('usersettings/', include('settings.urls'))
 ]
 
 # To dodaje obsługę plików statycznych ORAZ zdjęć
