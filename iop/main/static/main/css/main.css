@@ -1,66 +1,33 @@
-/*body {*/
-/*    background: #2c2c2c;*/
-/*}*/
+body {
+    background-color: #313338;
+    color: #dbdee1;
+}
 
-/*aside {*/
-/*    float: left;*/
-/*    background: #181818;*/
-/*    width: 20%;*/
-/*    padding: 2.5%;*/
-/*    height: 100vh;*/
-/*    color: #fff;*/
-/*    border-right: 5px solid #4d4d4d*/
-/*}*/
+h1, h2, h3, h4, h5, h6 {
+    color: #f2f3f5;
+}
 
-/*aside img {*/
-/*    width: 80px;*/
-/*    float: left;*/
+a {
+    color: #00a8fc; /* linki */
+    text-decoration: none;
+}
 
-/*}*/
+.discord-navbar {
+    background-color: #1e1f22; 
+    border-bottom: 2px solid #111214;
+}
 
-/*aside .logo {*/
-/*    font-size: 40px;*/
-/*    margin-left: 10px;*/
-/*    font-weight: bold;*/
-/*    position: relative;*/
-/*    top: -5px;*/
-/*}*/
+.daButton {
+    background-color: #b5bac1;
+    color: #383a40;
+    font-weight: 500;
+    border: none;
+    transition: background-color 0.2s ease; /* płynne przejście koloru */
+    border-radius: 4px;
+    padding: 8px 24px
+}
 
-/*aside h3 {*/
-/*    margin-top: 50px;*/
-/*    font-size: 28px;*/
-/*}*/
-
-/*aside ul {*/
-/*    list-style: none;*/
-/*}*/
-
-/*aside ul li {*/
-/*    color: #fff;*/
-/*    display: block;*/
-/*    margin-top: 20px;*/
-/*    transition: transform .6s ease;*/
-/*}*/
-
-/*aside ul li:hover, aside ul a:hover {*/
-/*    color: #eb5959;*/
-/*    text-decoration: none;*/
-/*    transform: scale(1.05);*/
-/*}*/
-
-/*main .features {*/
-/*    float: left;*/
-/*    color: #fff;*/
-/*    margin-top: 100px;*/
-/*    text-align: center;*/
-/*    width: 75%;*/
-/*}*/
-
-/*main .features h1 {*/
-/*    font-size: 50px;*/
-/*}*/
-
-/*main .features p {*/
-/*    max-width: 400px;*/
-/*    margin: 20px auto;*/
-/*}*/
+.daButton:hover {
+    background-color: #dbdee1; /* Ciemniejszy odcień przy najechaniu myszką */
+    color: #383a40;
+}
