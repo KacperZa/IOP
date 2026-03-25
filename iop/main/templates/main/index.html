@@ -1,18 +1,193 @@
 {% extends 'main/layout/layout.html' %}
+{% load static %}
 
-{% block title%}Homepage{% endblock %}
+{% block title %}Strona Główna{% endblock %}
 
-{% block content%}
-    <h1>Homepage</h1>
-    <div class="container">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus non dolor non sollicitudin. Vivamus augue lectus, congue vitae placerat eu, eleifend quis sapien. Ut ut neque iaculis, egestas orci non, mattis ligula. Donec sed gravida elit. In blandit sapien ac tortor accumsan, at volutpat lacus bibendum. Nulla facilisi. Praesent interdum eros rutrum elementum feugiat. Nunc vitae arcu sit amet felis placerat aliquet. Pellentesque venenatis libero in eleifend ultrices. Etiam consectetur tempus turpis, ut elementum dolor. Nulla ut ornare tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque ultrices viverra sollicitudin. Nulla magna nisl, interdum in commodo ac, consectetur eu elit.</p>
-        <p>Aliquam erat volutpat. Vivamus ornare volutpat enim, non efficitur lectus condimentum ut. Fusce nec nunc molestie, malesuada lacus vitae, tristique nibh. Etiam aliquet porta felis. Morbi pharetra rhoncus mauris eget egestas. Phasellus ut augue eu dui interdum porttitor et ut turpis. Vivamus nunc libero, porttitor eu ante ac, tincidunt condimentum dui. Pellentesque vel nisl a risus luctus vulputate a id libero. Nulla venenatis nunc et fermentum malesuada. Proin in leo auctor, vestibulum quam eget, maximus dui. Fusce sagittis condimentum turpis quis volutpat. Etiam a nisi vitae ante elementum porta. Vestibulum congue luctus nunc, vel sagittis risus. In hac habitasse platea dictumst. Pellentesque iaculis sapien nisl, sollicitudin iaculis neque varius venenatis.</p>
-        <p>Suspendisse ut nisi posuere, lacinia ipsum a, pharetra tortor. Vestibulum dapibus facilisis eros, vitae elementum nulla mattis et. Duis sollicitudin ultricies felis, a finibus lacus lacinia ac. Maecenas suscipit justo justo, id lobortis mauris tempor ac. Fusce sodales feugiat elementum. Praesent vehicula eros pellentesque nisl iaculis, sed malesuada sapien pretium. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-        <p>Morbi dapibus, dui et euismod congue, lacus nunc consectetur eros, ut tincidunt arcu dui vitae urna. Curabitur eu tortor eget risus blandit ullamcorper. Etiam enim arcu, rhoncus a lorem sed, venenatis malesuada nibh. Maecenas et turpis nulla. Curabitur posuere laoreet posuere. Fusce rhoncus lectus quis ullamcorper interdum. Aenean finibus pretium massa vitae dictum.</p>
-        <p>Etiam vel massa orci. Integer id convallis turpis, vel feugiat quam. Ut pretium semper mauris, vitae eleifend mi pharetra vitae. Aliquam erat volutpat. Sed condimentum libero dolor, vitae semper quam dignissim sed. Nunc efficitur erat a urna interdum, ac tristique mauris dignissim. Maecenas vehicula semper enim, eu placerat ipsum posuere at. Sed eget dui in ante egestas varius at ut ligula. Fusce aliquam tortor feugiat, molestie velit id, sollicitudin urna.</p>
-    </div>
+{% block content %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <button class="daButton">Go to about us page</button>
+<div style="display: flex; background-color: #121212; color: white; min-height: 100vh; font-family: 'Inter', sans-serif; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw;">
+    
+    <aside style="width: 300px; min-width: 300px; background-color: #181818; padding: 30px; border-right: 1px solid #282828;">
+        <h4 style="margin-bottom: 25px; display: flex; align-items: center; gap: 10px; color: #fff;">
+            <span class="material-symbols-outlined" style="color: #ca9eff;">tune</span> Filtry
+        </h4>
+        
+        <form method="GET" action="">
+            <div style="margin-bottom: 25px;">
+                <label style="color: #666; font-size: 11px; text-transform: uppercase; font-weight: bold;">Szukaj</label>
+                <div style="position: relative; margin-top: 8px;">
+                    <span class="material-symbols-outlined" style="position: absolute; left: 10px; top: 10px; color: #444; font-size: 20px;">search</span>
+                    <input type="text" name="search" placeholder="Czego szukasz?" 
+                           style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 10px 10px 10px 40px; border-radius: 8px; font-size: 14px;">
+                </div>
+            </div>
 
-    {% include 'main/test.html' %}
+            <div style="margin-bottom: 25px;">
+                <label style="color: #666; font-size: 11px; text-transform: uppercase; font-weight: bold;">Zakres cen</label>
+                <div style="display: flex; gap: 10px; margin-top: 8px; align-items: center;">
+                    <input type="number" name="price_min" placeholder="Od" style="width: 45%; background: #222; border: 1px solid #333; color: white; padding: 10px; border-radius: 8px;">
+                    <span style="color: #444;">-</span>
+                    <input type="number" name="price_max" placeholder="Do" style="width: 45%; background: #222; border: 1px solid #333; color: white; padding: 10px; border-radius: 8px;">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="color: #666; font-size: 11px; text-transform: uppercase; font-weight: bold;">Sortuj według</label>
+                <select name="sort" style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 10px; border-radius: 8px; margin-top: 8px; cursor: pointer; font-size: 14px;">
+                    <option value="latest">Najnowsze</option>
+                    <option value="price_asc">Cena: rosnąco</option>
+                    <option value="price_desc">Cena: malejąco</option>
+                </select>
+            </div>
+
+            <button type="submit" class="daButton" style="width: 100%; justify-content: center; gap: 10px;">
+                <span class="material-symbols-outlined">filter_alt</span> Zastosuj
+            </button>
+        </form>
+
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #282828;">
+            <button onclick="location.href='/about'" class="daButton secondary" style="width: 100%; justify-content: center; gap: 10px;">
+                <span class="material-symbols-outlined">info</span> O nas
+            </button>
+        </div>
+    </aside>
+
+    <main style="flex: 1; padding: 40px;">
+        
+        <section style="margin-bottom: 50px;">
+            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 25px;">Przeglądaj kategorie</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px;">
+                
+                <div class="category-card">
+                    <span class="material-symbols-outlined icon">devices</span>
+                    <span class="name">Elektronika</span>
+                </div>
+
+                <div class="category-card">
+                    <span class="material-symbols-outlined icon">directions_car</span>
+                    <span class="name">Pojazdy</span>
+                </div>
+
+                <div class="category-card">
+                    <span class="material-symbols-outlined icon">checkroom</span>
+                    <span class="name">Moda</span>
+                </div>
+
+                <div class="category-card">
+                    <span class="material-symbols-outlined icon">chair</span>
+                    <span class="name">Dom i Ogród</span>
+                </div>
+				<div class="category-card">
+                    <span class="material-symbols-outlined icon">More</span>
+                    <span class="name">Inne</span>
+                </div>
+            </div>
+        </section>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2 style="font-size: 24px; font-weight: 800;">Najnowsze ogłoszenia</h2>
+            <div style="background: #222; padding: 5px 15px; border-radius: 20px; font-size: 13px; color: #888;">
+                Znaleziono: <span style="color: #ca9eff; font-weight: bold;">{{ articles|length }}</span>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px;">
+            {% for el in articles %}
+            <div class="ra-card" style="background: #181818; border-radius: 16px; overflow: hidden; border: 1px solid #282828; transition: 0.3s; position: relative;">
+                
+                <div style="position: absolute; top: 15px; right: 15px; background: rgba(202, 158, 255, 0.9); padding: 6px 14px; border-radius: 10px; color: black; font-weight: 800; font-size: 14px; z-index: 2;">
+                    {{ el.price }} zł
+                </div>
+
+                <div style="width: 100%; height: 200px; background: #222; overflow: hidden;">
+                {% if el.image %}
+                    <img src="{{ el.image.url }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #333;">
+                        <span class="material-symbols-outlined" style="font-size: 48px;">image</span>
+                    </div>
+                {% endif %}
+                </div>
+
+                <div style="padding: 20px;">
+                    <h3 style="font-size: 18px; margin: 0 0 10px 0; color: #fff; font-weight: 600;">
+                        {{ el.title }}
+                    </h3>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <span style="color: #555; font-size: 12px; display: flex; align-items: center; gap: 5px;">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">calendar_today</span>
+                            {{ el.published_at|date:"d.m.Y" }}
+                        </span>
+                        <a href="/news/{{ el.id }}" class="daButton" style="padding: 8px 12px; text-decoration: none;">
+                            <span class="material-symbols-outlined">visibility</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div style="grid-column: 1/-1; text-align: center; padding: 80px; color: #444; background: #181818; border-radius: 20px;">
+                <p>Brak ogłoszeń</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</div>
+
+<style>
+    /* Stylowanie scrollbara, żeby pasował do mrocznego klimatu */
+    body { overflow-x: hidden; }
+
+    /* GUZIK */
+    .daButton {
+        background: #ca9eff;
+        color: black;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .daButton:hover {
+        background: #e0bfff;
+        box-shadow: 0 0 15px rgba(202, 158, 255, 0.5);
+        transform: scale(1.02);
+    }
+
+    .daButton.secondary {
+        background: #282828;
+        color: #ca9eff;
+        border: 1px solid #333;
+    }
+
+    .daButton.secondary:hover {
+        background: #333;
+        border-color: #ca9eff;
+    }
+
+    /* KATEGORIE */
+    .category-card {
+        background: #181818;
+        border: 1px solid #282828;
+        border-radius: 20px;
+        padding: 25px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .category-card .icon { font-size: 36px; color: #ca9eff; margin-bottom: 12px; }
+    .category-card .name { font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .category-card:hover { border-color: #ca9eff; background: #222; transform: translateY(-5px); }
+
+    /* KARTY OGŁOSZEŃ */
+    .ra-card:hover { transform: translateY(-10px); border-color: #ca9eff !important; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+</style>
 {% endblock %}
