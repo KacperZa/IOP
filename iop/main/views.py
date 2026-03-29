@@ -13,6 +13,7 @@ from news.models import Ulubione
 @login_required
 def toggle_ulubione(request, ogloszenie_id):
 
+    # ULUBIONE
     if request.method != 'POST':
         return JsonResponse({'error': 'Tylko POST'})
     
