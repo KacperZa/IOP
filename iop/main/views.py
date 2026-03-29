@@ -143,3 +143,25 @@ def index(request):
         articles = articles.order_by('-published_at') 
 
     return render(request, "main/index.html", {'articles': articles})
+
+def index(request):
+    articles = Articles.objects.all()
+
+    
+    search_query = request.GET.get('search')
+    price_min = request.GET.get('price_min')
+    price_max = request.GET.get('price_max')
+    category_filter = request.GET.get('category') 
+
+    
+    if category_filter:
+        articles = articles.filter(category=category_filter)
+    if search_query:
+        articles = articles.filter(title__icontains=search_query)
+    if price_min:
+        articles = articles.filter(price__gte=price_min)
+    if price_max:
+        articles = articles.filter(price__lte=price_max)
+
+    articles = articles.order_by('-published_at')
+    return render(request, "main/index.html", {'articles': articles})
