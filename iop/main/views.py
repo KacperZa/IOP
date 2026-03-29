@@ -1,6 +1,6 @@
 # Plik do definiowania widoków, które są renderowane za pomocą szablonizatora Jinja oraz wyświetlane w przeglądarce
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -8,8 +8,28 @@ from django.contrib import messages  # to show message back for errors
 from django.contrib.auth.decorators import login_required
 
 from news.models import Articles
+from news.models import Ulubione
 
-# Widok strony głównej z filtrowaniem 1:1 pod Twój projekt
+@login_required
+def toggle_ulubione(request, ogloszenie_id):
+
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Tylko POST'})
+    
+    ogloszenie = get_object_or_404(Articles, id=ogloszenie_id)
+    ulubione, created = Ulubione.objects.get_or_create(
+        user=request.user,
+        ogloszenie=ogloszenie
+    )
+    if not created:
+        ulubione.delete()
+
+    return JsonResponse({
+        'ulubione': created,
+        'liczba': ogloszenie.ulubione.count(),
+    })
+
+# Create your views here.
 def index(request):
     # Pobieramy wszystkie ogłoszenia na start
     articles = Articles.objects.all().order_by('-published_at')
@@ -35,7 +55,12 @@ def index(request):
 @login_required
 def article(request):
     values = Articles.objects.filter(autor = request.user).order_by('-published_at')
-    return render(request, "main/ogloszenia.html", {'news': values})
+    # ULUBIONE
+    user_ulubione_ids = []
+    user_ulubione_ids = list(
+        request.user.ulubione.values_list('ogloszenie_id', flat=True)
+    )
+    return render(request, "main/ogloszenia.html", {'news': values, 'user_ulubione_ids': user_ulubione_ids})
 
 
 def about(request):

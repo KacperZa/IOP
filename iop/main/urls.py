@@ -10,5 +10,7 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('login', views.login_user, name='login_user'),
     path('register', views.register, name='register_user'),
-    path('logout', views.logout_user, name='logout_user')
+    path('logout', views.logout_user, name='logout_user'),
+    path('ogloszenie/<int:ogloszenie_id>/ulubione/', views.toggle_ulubione, name='toggle_ulubione'),
+
 ]

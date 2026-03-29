@@ -53,3 +53,14 @@ class Articles(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Ulubione(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ulubione')
+    ogloszenie = models.ForeignKey(Articles, on_delete=models.CASCADE, related_name='ulubione')
+    data_dodania = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'ogloszenie')
+
+    def __str__(self):
+        return f"{self.user} lubi {self.ogloszenie}"
