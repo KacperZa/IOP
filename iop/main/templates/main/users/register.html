@@ -1,33 +1,36 @@
 {% extends 'main/layout/clean_layout.html' %}
  
- {% block title%}Register{% endblock %}
+{% block title%}Register{% endblock %}
  
- {% block content%}
- <div class="d-flex align-items-center justify-content-center px-4" style="height: 80vh">
-     <div style="max-width: 500px" class="w-100">
-         <h1>Register</h1>
-         <form method="POST" action="/register">
-             {% csrf_token %}
+{% block content%}
+
+<div class="d-flex align-items-center justify-content-center px-4" style="height: 100vh;">
+    
+    <div style="max-width: 480px; background-color: #313338; padding: 32px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);" class="w-100">
+        
+        <h2 class="text-center mb-4" style="color: #f2f3f5; font-weight: 600; font-size: 24px;">Create an account</h2>
+        
+        <form method="POST" action="/register">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="username" class="form-label discord-label">Username</label>
+              <input type="text" class="form-control discord-input" id="username" name="username" aria-describedby="username" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label discord-label">Email address</label>
+              <input type="email" class="form-control discord-input" id="email" name="email" aria-describedby="emailHelp" required>
+            </div>
+
+            <div class="mb-4">
+              <label for="password" class="form-label discord-label">Password</label>
+              <input type="password" class="form-control discord-input" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-discord w-100">Register</button>
+        </form>
+    </div>
+</div>
  
-             <div class="mb-3">
-               <label for="username" class="form-label">Username</label>
-               <input type="text" class="form-control" id="username" name="username" aria-describedby="username" required>
-             </div>
- 
-             <div class="mb-3">
-               <label for="email" class="form-label">Email address</label>
-               <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
-               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-             </div>
- 
-             <div class="mb-3">
-               <label for="password" class="form-label">Password</label>
-               <input type="password" class="form-control" id="password" name="password" required>
-             </div>
- 
-             <button type="submit" class="btn btn-primary btn-block">Register</button>
-           </form>
-     </div>
- </div>
- 
- {% endblock %}
+{% endblock %}

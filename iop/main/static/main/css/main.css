@@ -1,5 +1,8 @@
+/* =========================================
+   1. BAZOWE STYLE (Tło, teksty, linki)
+========================================= */
 body {
-    background-color: #313338;
+    background-color: #121212;
     color: #dbdee1;
 }
 
@@ -8,26 +11,68 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-    color: #00a8fc; /* linki */
+    color: #00a8fc;
     text-decoration: none;
 }
 
+a:hover {
+    text-decoration: underline
+}
+
+/* =========================================
+   2. NAWIGACJA (Górny pasek)
+========================================= */
 .discord-navbar {
     background-color: #1e1f22; 
-    border-bottom: 2px solid #111214;
+    border-bottom: 2px solid #282828;
 }
 
-.daButton {
-    background-color: #b5bac1;
-    color: #383a40;
-    font-weight: 500;
-    border: none;
-    transition: background-color 0.2s ease; /* płynne przejście koloru */
+/* =========================================
+   3. FORMULARZE (Inputy i labele)
+========================================= */
+
+.discord-label {
+    color: #b5bac1 !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+    letter-spacing: 0.5px !important;
+}
+
+.discord-input {
+    background-color: #1e1f22 !important;
+    color: #dbdee1 !important;
+    border: none !important;
+    padding: 12px 14px !important;
+    font-size: 15px !important;
+    border-radius: 4px !important;
+}
+
+.discord-input:focus {
+    background-color: #1e1f22 !important;
+    color: white !important;
+    box-shadow: 0 0 0 1px #ca9eff !important;
+    outline: none !important;
+}
+
+/* =========================================
+   4. PRZYCISKI
+========================================= */
+
+.btn-discord {
+    background-color: #ca9eff;
+    color: #282828;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px;
+    border: 2px solid transparent; 
     border-radius: 4px;
-    padding: 8px 24px
+    transition: all 0.2s ease; 
 }
 
-.daButton:hover {
-    background-color: #dbdee1; /* Ciemniejszy odcień przy najechaniu myszką */
-    color: #383a40;
+.btn-discord:hover {
+    background-color: transparent;
+    color: #ca9eff; 
+    border-color: #ca9eff; 
 }
