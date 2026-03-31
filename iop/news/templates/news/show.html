@@ -1,18 +1,72 @@
 {% extends 'main/layout/layout.html' %}
 
-{% block title%}(#{{ article.id }}) {{ article.title }}{% endblock %}
+{% block content %}
+<style>
+    /* Styl dla fioletowego przycisku */
+    .btn-contact {
+        display: block;
+        background: #ca9eff; /* Twój fioletowy kolor */
+        color: #000;
+        text-align: center;
+        padding: 15px;
+        border-radius: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: all 0.3s ease; /* Płynne przejście */
+        border: none;
+    }
 
-{% block content%}
-    <div class="d-flex justify-content-between align-items-center w-100">
-        <h1>(#{{ article.id }}) {{ article.title }}</h1>
-        <div>
-            <a href="/news/{{ article.id }}/update" class="btn btn-info">Update</a>
-            <a href="/news/{{ article.id }}/delete" class="btn btn-danger">Delete</a>
+    /* Efekt po najechaniu myszką */
+    .btn-contact:hover {
+        background: #b380ff; /* Nieco ciemniejszy fiolet */
+        transform: translateY(-2px); /* Delikatne uniesienie */
+        box-shadow: 0 5px 15px rgba(202, 158, 255, 0.4);
+        color: #000;
+    }
+</style>
 
+<div style="background: #000; min-height: 100vh; padding: 40px 20px; color: #fff;">
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; gap: 30px;">
+        
+        <div style="flex: 2;">
+            <div style="background: #111; padding: 10px; border-radius: 20px; border: 1px solid #222;">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" style="width: 100%; border-radius: 15px; display: block;">
+                {% endif %}
+            </div>
+
+            <div style="margin-top: 30px; background: #111; padding: 30px; border-radius: 20px; border: 1px solid #222;">
+                <h3 style="font-weight: 800; margin-bottom: 20px;">Opis przedmiotu</h3>
+                <p style="color: #ccc; line-height: 1.6;">{{ article.body }}</p>
+            </div>
+        </div>
+
+        <div style="flex: 1; position: sticky; top: 20px; height: fit-content;">
+            <div style="background: #111; padding: 25px; border-radius: 20px; border: 1px solid #222; margin-bottom: 20px;">
+                <span style="font-size: 12px; color: #666; text-transform: uppercase;">{{ article.get_category_display }}</span>
+                <h1 style="font-size: 28px; font-weight: 900; margin: 10px 0;">{{ article.title }}</h1>
+                <div style="font-size: 32px; font-weight: 900; color: #fff; margin: 20px 0;">{{ article.price }} <small style="font-size: 16px;">PLN</small></div>
+                
+                <a href="{% url 'contact' %}" class="btn-contact">Napisz do sprzedawcy</a>
+            </div>
+
+            <div style="background: #111; padding: 20px; border-radius: 20px; border: 1px solid #222;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <div style="width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
+                    <div>
+                        <div style="font-size: 14px; font-weight: 700;">{{ article.autor.username }}</div>
+                        <div style="font-size: 12px; color: #666;">Na IOP od {{ article.autor.date_joined|date:"M Y" }}</div>
+                    </div>
+                </div>
+
+                {% if user == article.autor %}
+                <div style="display: flex; gap: 10px; border-top: 1px solid #222; padding-top: 15px;">
+                    <a href="{% url 'news_update' article.id %}" style="flex: 1; background: #222; color: #fff; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-size: 14px; border: 1px solid #333;">✎ Edytuj</a>
+                    <a href="{% url 'news_delete' article.id %}" style="flex: 1; background: #221111; color: #ff5555; text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-size: 14px; border: 1px solid #442222;">🗑 Usuń</a>
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
-    <div class="d-flex flex-column gap-4">
-        <p>Published at: {{ article.published_at }}</p>
-        <p>{{ article.body }}</p>
-    </div>
+</div>
 {% endblock %}
