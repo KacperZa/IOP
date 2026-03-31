@@ -52,7 +52,19 @@
 
             <div style="background: #111; padding: 20px; border-radius: 20px; border: 1px solid #222;">
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                    <div style="width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</div>
+                    <div style="width: 40px; height: 40px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        {% if article.autor.profile.avatar %}
+                            <img src="{{ article.autor.profile.avatar.url }}"
+                                class="rounded-circle"
+                                width="40" height="40"
+                                style="object-fit: cover;">
+                        {% else %}
+                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center"
+                                style="width:40px; height:40px;">
+                                <span class="text-white">{{ article.autor.username|first|upper }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
                     <div>
                         <div style="font-size: 14px; font-weight: 700;">{{ article.autor.username }}</div>
                         <div style="font-size: 12px; color: #666;">Na IOP od {{ article.autor.date_joined|date:"M Y" }}</div>
