@@ -45,6 +45,7 @@ def delete_account(request):
             messages.error(request, 'Nieprawidłowe hasło.')
     return redirect('settings')
 
+# Change username
 @login_required
 def change_username(request):
     if request.method == 'POST':
@@ -56,4 +57,14 @@ def change_username(request):
                 request.user.username = new_username
                 request.user.save()
                 messages.success(request, 'Nazwa użytkownika została zmieniona.')
+    return redirect('settings')
+
+# PFP change
+@login_required
+def change_avatar(request):
+    if request.method == 'POST' and request.FILES.get('avatar'):
+        profile = request.user.profile
+        profile.avatar = request.FILES['avatar']
+        profile.save()
+        messages.success(request, 'Profile picture updated.')
     return redirect('settings')

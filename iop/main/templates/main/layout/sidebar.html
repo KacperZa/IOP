@@ -26,7 +26,13 @@
         {% if request.user.is_authenticated %}
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle text-white d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="Avatar" width="32" height="32" class="rounded-circle me-2">
+              <!--TEN KOD JEST NA ZDJECIE PROFILOWE, MOZNA GO WSZEDZIE DAC GDZIE TRZEBA-->
+              {% if request.user.profile.avatar %}
+                  <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" width="32" height="32" class="rounded-circle me-2">
+              {% else %}
+                  <img src="https://github.com/mdo.png" alt="Avatar" width="32" height="32" class="rounded-circle me-2">
+              {% endif %}
+              <!--__________________KONIEC KODU_______________________-->
               <strong>{{ request.user.username }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">

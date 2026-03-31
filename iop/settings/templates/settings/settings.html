@@ -16,7 +16,38 @@
     {% endif %}
 
     <div class='row g-4 justify-content-center'>
+        <!-- Zmiana zdjęcia profilowego -->
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Profile Picture</h5>
 
+                    <!-- podgląd aktualnego zdjęcia -->
+                    {% if request.user.profile.avatar %}
+                        <img src="{{ request.user.profile.avatar.url }}"
+                            class="rounded-circle mb-3"
+                            width="80" height="80"
+                            style="object-fit: cover;"
+                            alt="Avatar">
+                    {% else %}
+                        <div class="rounded-circle bg-secondary mb-3 d-flex align-items-center justify-content-center"
+                            style="width:80px; height:80px;">
+                            <span class="text-white fs-4">{{ request.user.username|first|upper }}</span>
+                        </div>
+                    {% endif %}
+
+                    <form method="post" action="{% url 'change_avatar' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Choose a new picture</label>
+                            <input type="file" name="avatar" class="form-control" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Change Picture</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
         <!-- Username change -->
         <div class="col-12">
             <div class="card shadow-sm">
