@@ -1,10 +1,9 @@
-# Model ogłoszenia z obsługą zdjęć, ceny i kategorii
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
 class Articles(models.Model):
-    # Lista kategorii do wyboru w ogłoszeniu
     KATEGORIE = [
         ('elektronika', 'Elektronika'),
         ('dom', 'Dom i Ogród'),
@@ -35,8 +34,7 @@ class Articles(models.Model):
         default='inne'
     )
 
-    # NOWE POLE NA ZDJĘCIE:
-    # Zdjęcia będą trafiać do folderu 'media/ogloszenia/'
+
     image = models.ImageField(
         'Zdjęcie przedmiotu', 
         upload_to='ogloszenia/', 
