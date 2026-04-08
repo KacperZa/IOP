@@ -36,9 +36,9 @@
               <strong>{{ request.user.username }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">New project...</a></li><!-- <-PRZYSZLOSC NIEZNANA  -->
               <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'user_profile' request.user.username %}">Profil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <form method="POST" action="/logout" class="m-0">

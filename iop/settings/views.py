@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
+from news.models import Articles
 
 # Create your views here.
 #settings page
@@ -68,3 +70,13 @@ def change_avatar(request):
         profile.save()
         messages.success(request, 'Profile picture updated.')
     return redirect('settings')
+
+def user_profile(request, username):
+    user = get_object_or_404(User,username=username)
+    articles = Articles.objects.filter(autor=user).order_by('-published_at')
+
+    return render(request, 'settings/profile.html', {
+        'profile_user': user,
+        'articles': articles,
+        'articles_count': articles.count(),
+    })

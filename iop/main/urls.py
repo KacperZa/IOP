@@ -3,6 +3,8 @@
 from django.urls import path
 from . import views
 from news.views import NewsDetailView, NewsUpdateView, NewsDeleteView
+from django.conf.urls import include
+
 urlpatterns = [
     path('', views.index, name='home'),
     path('about', views.about, name='about'),
@@ -15,6 +17,7 @@ urlpatterns = [
     path('news/<int:pk>/update/', NewsUpdateView.as_view(), name='news_update'),
     path('news/<int:pk>/delete/', NewsDeleteView.as_view(), name='news_delete'),
     path('ogloszenie/<int:ogloszenie_id>/ulubione/', views.toggle_ulubione, name='toggle_ulubione'),
+    path('settings/', include('settings.urls')),
 
 ]
 

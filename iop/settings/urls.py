@@ -7,4 +7,5 @@ urlpatterns = [
     path('settings/password/', views.change_password, name='change_password'),
     path('settings/delete/', views.delete_account, name='delete_account'),
     path('settings/avatar/', views.change_avatar, name='change_avatar'),
+    path('profile/<str:username>/', views.user_profile, name='user_profile'),
 ]
