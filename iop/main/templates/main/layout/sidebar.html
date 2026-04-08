@@ -37,21 +37,21 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
               <li><a class="dropdown-item" href="#">New project...</a></li><!-- <-PRZYSZLOSC NIEZNANA  -->
-              <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+              <li><a class="dropdown-item" href="{% url 'settings' %}">Ustawienia</a></li>
               <li><a class="dropdown-item" href="{% url 'user_profile' request.user.username %}">Profil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <form method="POST" action="/logout" class="m-0">
                   {% csrf_token %}
-                  <button class="dropdown-item text-danger" type="submit">Logout</button>
+                  <button class="dropdown-item text-danger" type="submit">Wyloguj</button>
                 </form>
               </li>
             </ul>
           </div>
         {% else %}
           <div class="d-flex gap-2">
-            <a class="btn btn-primary" href="/login">Login</a>
-            <a class="btn btn-info text-white" href="/register">Register</a>
+            <a class="btn btn-primary" href="/login">Zaloguj się</a>
+            <a class="btn btn-info text-white" href="/register">Zarejestruj się</a>
           </div>
         {% endif %}
       </div>

@@ -30,10 +30,8 @@
                             style="object-fit: cover; height: none;"
                             alt="Avatar">
                     {% else %}
-                        <div class="rounded-circle bg-secondary mb-3 d-flex align-items-center justify-content-center"
-                            style="width:80px; height:80px;">
-                            <span class="text-white fs-4">{{ request.user.username|first|upper }}</span>
-                        </div>
+                        <img src="https://github.com/mdo.png" alt="Avatar" class="rounded-circle bg-secondary mb-3 d-flex align-items-center justify-content-center" style="width:80px; height:80px;" id="pfp">
+                    
                     {% endif %}
 
                     <form method="post" action="{% url 'change_avatar' %}" enctype="multipart/form-data">
