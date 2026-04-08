@@ -5,19 +5,19 @@ register = template.Library();
 @register.simple_tag
 def get_links():
     return [{
-        'name': 'Home',
+        'name': 'Dom',
         'href': '/',
         'icon': 'fa-house',
     }, {
-        'name': 'My Listings',
+        'name': 'Moje ogłoszenia',
         'href': '/cars',
         'icon': 'fa-car',
     },{
-        'name': 'New Listings',
+        'name': 'Ogłoszenia',
         'href': '/news/',
         'icon': 'fa-newspaper',
     },{
-        'name': 'Add Listing',
+        'name': 'Dodaj ogłoszenie',
         'href': '/news/create',
         'icon': 'fa-plus',
     }]
