@@ -35,9 +35,8 @@ class Articles(models.Model):
     )
 
 
-    image = models.ImageField(
-        'Zdjęcie przedmiotu', 
-        upload_to='ogloszenia/', 
+    image = models.URLField(
+        "Zdjęcie",
         blank=True, 
         null=True
     )

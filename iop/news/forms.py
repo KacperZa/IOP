@@ -2,9 +2,10 @@ from django import forms
 from .models import Articles
 
 class ArticlesForm(forms.ModelForm):
+    iamge = forms.ImageField(required=False, label="Dodaje zdjęcie", widget=forms.FileInput(attrs={'id': 'id_image'}))
     class Meta:
         model = Articles
-        fields = ['title', 'excerpt', 'body', 'price', 'category', 'image']
+        fields = ['title', 'excerpt', 'body', 'price', 'category']
         
         labels = {
             'title': 'Tytuł ogłoszenia',

@@ -5,9 +5,25 @@ from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
 from django.urls import reverse_lazy
+import uuid
+from django.conf import settings
+from supabase_client import supabase
 
 from .models import Articles
 from .forms import ArticlesForm
+
+def upload_image(file):
+    # Wysyla plik do supabase i zwraca url
+    extension = file.name.split('.')[-1]
+    file_name = f"{uuid.uuid4()}.{extension}"
+
+    supabase.storage.from_(settings.SUPABASE_BUCKET).upload(
+        path=file_name,
+        file=file.read(),
+        file_options={'content-type': file.content_type}
+    )
+
+    return supabase.storage.from_(settings.SUPABASE_BUCKET).get_public_url(file_name)
 
 
 def news_home(request):
@@ -23,6 +39,10 @@ def news_create(request):
         if form.is_valid():
             ogloszenie = form.save(commit=False)
             ogloszenie.autor = request.user
+
+            if 'image' in request.FILES:
+                ogloszenie.image = upload_image(request.FILES['image'])
+
             ogloszenie.save() 
             return redirect('home') 
         else:
