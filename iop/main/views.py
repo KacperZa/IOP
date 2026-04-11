@@ -165,3 +165,6 @@ def index(request):
 
     articles = articles.order_by('-published_at')
     return render(request, "main/index.html", {'articles': articles})
+
+def regulamin(request):
+    return render(request, "main/regulamin.html")
