@@ -40,6 +40,12 @@ a:hover {
     letter-spacing: 0.5px !important;
 }
 
+.purple-discord-label {
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: #ca9eff !important;
+    }
+
 .discord-input {
     background-color: #1e1f22 !important;
     color: #dbdee1 !important;

@@ -7,24 +7,32 @@
 <div class="listing-container">
     <div class="listing-header">
         <h1>Dodaj Nowe Ogłoszenie</h1>
-        <p>Wypełnij poniższe pola, aby wystawić przedmiot</p>
     </div>
+    <div class="discord-label"><p>Wypełnij poniższe pola, aby wystawić przedmiot</div>
 	<style>
     .listing-container { background-color: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 40px; max-width: 650px; margin: 40px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    .listing-header h1 { background: linear-gradient(90deg, #ca9eff 0%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; }
+    .listing-header h1 { color: #ca9eff; font-size: 32px; }
     .form-group { margin-bottom: 20px; }
     .form-label { display: flex; align-items: center; gap: 10px; font-size: 14px; margin-bottom: 8px; color: #c9d1d9; }
     .form-input, .form-textarea, .form-select { 
         width: 100%; background-color: #0d1117; border: 2px solid #30363d; border-radius: 8px; 
         padding: 12px; color: #ffffff; box-sizing: border-box; 
     }
-    .form-input:focus { border-color: #ca9eff; outline: none; box-shadow: 0 0 10px rgba(202, 158, 255, 0.4); }
+    .form-input:focus , .form-textarea:focus, .form-select:focus{ border-color: #ca9eff; outline: none; box-shadow: none !important;}
     .upload-area { border: 2px dashed #ca9eff; padding: 20px; text-align: center; border-radius: 8px; cursor: pointer; margin-top: 10px; }
     .btn-publish { 
-        width: 100%; background: linear-gradient(90deg, #ca9eff 0%, #ff1177 100%); 
-        border: none; padding: 15px; color: white; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 20px;
+        width: 100%; background: #ca9eff; 
+        padding: 15px; color: #282828; font-weight: bold; cursor: pointer; margin-top: 20px;
+        border: 2px solid transparent; 
+        border-radius: 4px;
+        transition: all 0.2s ease
     }
-    .icon-title { color: #ca9eff; } .icon-desc { color: #33ff99; } .icon-price { color: #ffff99; }
+    .btn-publish:hover{
+        background-color: transparent;
+        color: #ca9eff; 
+        border-color: #ca9eff; 
+    }
+    .icon-title { color: #ca9eff; }
 </style>
 
     <form method="post" enctype="multipart/form-data">
@@ -40,7 +48,7 @@
 
         <div class="form-group">
             <label for="{{ form.excerpt.id_for_label }}" class="form-label">
-                <span class="material-symbols-outlined input-icon icon-desc">description</span>
+                <span class="material-symbols-outlined input-icon icon-title">description</span>
                 Krótki opis
             </label>
             {{ form.excerpt }}
@@ -48,7 +56,7 @@
 
         <div class="form-group">
             <label for="{{ form.body.id_for_label }}" class="form-label">
-                <span class="material-symbols-outlined input-icon icon-desc">notes</span>
+                <span class="material-symbols-outlined input-icon icon-title">notes</span>
                 Pełna treść
             </label>
             {{ form.body }}
@@ -57,7 +65,7 @@
         <div style="display: flex; gap: 20px;">
             <div class="form-group" style="flex: 1;">
                 <label for="{{ form.price.id_for_label }}" class="form-label">
-                    <span class="material-symbols-outlined input-icon icon-price">attach_money</span>
+                    <span class="material-symbols-outlined input-icon icon-title">attach_money</span>
                     Cena
                 </label>
                 {{ form.price }}
@@ -65,7 +73,7 @@
 
             <div class="form-group" style="flex: 1;">
                 <label for="{{ form.category.id_for_label }}" class="form-label">
-                    <span class="material-symbols-outlined input-icon icon-category">category</span>
+                    <span class="material-symbols-outlined input-icon icon-title">category</span>
                     Kategoria
                 </label>
                 {{ form.category }}
