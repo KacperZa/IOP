@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 import uuid
 from django.conf import settings
 from supabase_client import supabase
+from django.views.decorators.cache import never_cache
+
 
 from .models import Articles
 from .forms import ArticlesForm
@@ -24,6 +26,7 @@ def upload_image(file):
 
     return supabase.storage.from_(settings.SUPABASE_BUCKET).get_public_url(file_name)
 
+@never_cache
 def news_home(request):
     articles_list = Articles.objects.all().order_by('-published_at')
     

@@ -19,7 +19,7 @@
             padding: 1rem;
             border-radius: 0.25rem;
             border-style: 0
-            box-shadow 0 .125rem .25rem rgba(0,0,0,.075);
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
             display: flex;
             flex-direction: row;
             gap: 1rem;
@@ -146,6 +146,7 @@
                         <p class="category"><small>Kategoria: {{ article.get_category_display }}</small></p>
                         <div class="statistics">
                             <p class="views"><span class="material-symbols-outlined">visibility</span> {{article.views}}</p>
+                            
                             {# ULUBIONE #}
                                 <p class="favourite">
                                     <a class="btn-ulubione" data-id="{{ article.id }}">

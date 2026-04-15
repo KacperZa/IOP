@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages  # to show message back for errors
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
 from news.models import Articles
 from news.models import Ulubione
@@ -52,7 +53,7 @@ def index(request):
     # Przekazujemy przefiltrowane ogłoszenia do szablonu
     return render(request, "main/index.html", {'articles': articles})
 
-
+@never_cache
 @login_required
 def article(request):
     values = Articles.objects.filter(autor = request.user).order_by('-published_at')
@@ -61,6 +62,7 @@ def article(request):
     user_ulubione_ids = list(
         request.user.ulubione.values_list('ogloszenie_id', flat=True)
     )
+    print(values)
     return render(request, "main/ogloszenia.html", {'news': values, 'user_ulubione_ids': user_ulubione_ids})
 
 
