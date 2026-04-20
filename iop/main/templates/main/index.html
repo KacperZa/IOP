@@ -40,18 +40,7 @@
                     <option value="price_desc">Cena: malejąco</option>
                 </select>
             </div>
-			<div style="margin-top: 25px; margin-bottom: 20px;">
-    <label style="color: #666; font-size: 11px; text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 12px;">Kategoria</label>
-    
-    <select name="category" style="width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; font-size: 14px; cursor: pointer;">
-        <option value="">Wszystkie kategorie</option>
-        <option value="elektronika">Elektronika</option>
-        <option value="motoryzacja">Motoryzacja</option>
-        <option value="moda">Moda</option>
-        <option value="dom">Dom i Ogród</option>
-        <option value="inne">Inne</option>
-    </select>
-</div>
+
 
             <button type="submit" class="daButton" style="width: 100%; justify-content: center; gap: 10px;">
                 <span class="material-symbols-outlined">filter_alt</span> Zastosuj
@@ -71,29 +60,31 @@
             <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 25px;">Przeglądaj kategorie</h2>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px;">
                 
-                <div class="category-card">
+                <a href="?category=elektronika" class="category-card">
                     <span class="material-symbols-outlined icon">devices</span>
                     <span class="name">Elektronika</span>
-                </div>
+                </a>
 
-                <div class="category-card">
+                <a href="?category=motoryzacja" class="category-card">
                     <span class="material-symbols-outlined icon">directions_car</span>
                     <span class="name">Pojazdy</span>
-                </div>
+                </a>
 
-                <div class="category-card">
+                <a href="?category=moda" class="category-card">
                     <span class="material-symbols-outlined icon">checkroom</span>
                     <span class="name">Moda</span>
-                </div>
+                </a>
 
-                <div class="category-card">
+                <a href="?category=dom" class="category-card">
                     <span class="material-symbols-outlined icon">chair</span>
                     <span class="name">Dom i Ogród</span>
-                </div>
-				<div class="category-card">
-                    <span class="material-symbols-outlined icon">More</span>
-                    <span class="name">Inne</span>
-                </div>
+                </a>
+
+                <a href="?" class="category-card">
+                    <span class="material-symbols-outlined icon">apps</span>
+                    <span class="name">Wszystkie</span>
+                </a>
+
             </div>
         </section>
 
@@ -148,10 +139,25 @@
 </div>
 
 <style>
-    /* Stylowanie scrollbara, żeby pasował do mrocznego klimatu */
     body { overflow-x: hidden; }
+    
+    .category-card {
+        text-decoration: none; /* Usunięcie podkreślenia linku */
+        background: #181818;
+        border: 1px solid #282828;
+        border-radius: 20px;
+        padding: 25px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .category-card .icon { font-size: 36px; color: #ca9eff; margin-bottom: 12px; }
+    .category-card .name { font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .category-card:hover { border-color: #ca9eff; background: #222; transform: translateY(-5px); }
 
-    /* GUZIK */
     .daButton {
         background: #ca9eff;
         color: black;
@@ -182,24 +188,15 @@
         border-color: #ca9eff;
     }
 
-    /* KATEGORIE */
-    .category-card {
-        background: #181818;
-        border: 1px solid #282828;
-        border-radius: 20px;
-        padding: 25px 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    .category-card .icon { font-size: 36px; color: #ca9eff; margin-bottom: 12px; }
-    .category-card .name { font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .category-card:hover { border-color: #ca9eff; background: #222; transform: translateY(-5px); }
-
-    /* KARTY OGŁOSZEŃ */
     .ra-card:hover { transform: translateY(-10px); border-color: #ca9eff !important; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+	.category-card, .category-card:hover, .category-card:active, .category-card:focus {
+    text-decoration: none !important; 
+    outline: none !important;         
+    box-shadow: none;                
+}
+
+.category-card .name {
+    text-decoration: none !important;
+}
 </style>
 {% endblock %}

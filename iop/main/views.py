@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from django.contrib import messages  # to show message back for errors
+from django.contrib import messages  
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 
@@ -13,8 +13,6 @@ from news.models import Ulubione
 
 @login_required
 def toggle_ulubione(request, ogloszenie_id):
-
-    # ULUBIONE
     if request.method != 'POST':
         return JsonResponse({'error': 'Tylko POST'})
     
@@ -31,33 +29,50 @@ def toggle_ulubione(request, ogloszenie_id):
         'liczba': ogloszenie.ulubione.count(),
     })
 
-# Create your views here.
-def index(request):
-    # Pobieramy wszystkie ogłoszenia na start
-    articles = Articles.objects.all().order_by('-published_at')
 
-    # Obsługa filtrów z bocznego paska (Sidebar)
+def index(request):
+    articles = Articles.objects.all()
+
+
     search_query = request.GET.get('search')
     price_min = request.GET.get('price_min')
     price_max = request.GET.get('price_max')
+    category_filter = request.GET.get('category')
+    sort_by = request.GET.get('sort')
 
+
+    if category_filter:
+        articles = articles.filter(category=category_filter)
     if search_query:
         articles = articles.filter(title__icontains=search_query)
-    
     if price_min:
         articles = articles.filter(price__gte=price_min)
-        
     if price_max:
         articles = articles.filter(price__lte=price_max)
 
-    # Przekazujemy przefiltrowane ogłoszenia do szablonu
-    return render(request, "main/index.html", {'articles': articles})
+
+    if sort_by == 'price_asc':
+        articles = articles.order_by('price') 
+    elif sort_by == 'price_desc':
+        articles = articles.order_by('-price') 
+    else:
+        articles = articles.order_by('-published_at') 
+
+
+    user_ulubione_ids = []
+    if request.user.is_authenticated:
+        user_ulubione_ids = list(request.user.ulubione.values_list('ogloszenie_id', flat=True))
+
+    return render(request, "main/index.html", {
+        'articles': articles, 
+        'user_ulubione_ids': user_ulubione_ids
+    })
 
 @never_cache
 @login_required
 def article(request):
     values = Articles.objects.filter(autor = request.user).order_by('-published_at')
-    # ULUBIONE
+
     user_ulubione_ids = []
     user_ulubione_ids = list(
         request.user.ulubione.values_list('ogloszenie_id', flat=True)
@@ -70,8 +85,6 @@ def about(request):
     return render(request, "main/about.html")
 
 
-# Using the Django authentication system (Django Documentation)
-# https://docs.djangoproject.com/en/5.1/topics/auth/default/
 def login_user(request):
     if request.user.is_authenticated:
         return redirect("home")
@@ -112,61 +125,12 @@ def register(request):
 
 def logout_user(request):
     logout(request)
-
     return redirect("home")
 
 
 def contact(request):
     return render(request, "main/contact.html")
 
-def index(request):
-    articles = Articles.objects.all()
-
-
-    search_query = request.GET.get('search')
-    price_min = request.GET.get('price_min')
-    price_max = request.GET.get('price_max')
-    
-
-    sort_by = request.GET.get('sort')
-
-    if search_query:
-        articles = articles.filter(title__icontains=search_query)
-    if price_min:
-        articles = articles.filter(price__gte=price_min)
-    if price_max:
-        articles = articles.filter(price__lte=price_max)
-
-    if sort_by == 'price_asc':
-        articles = articles.order_by('price') 
-    elif sort_by == 'price_desc':
-        articles = articles.order_by('-price') 
-    else:
-        articles = articles.order_by('-published_at') 
-
-    return render(request, "main/index.html", {'articles': articles})
-
-def index(request):
-    articles = Articles.objects.all()
-
-    
-    search_query = request.GET.get('search')
-    price_min = request.GET.get('price_min')
-    price_max = request.GET.get('price_max')
-    category_filter = request.GET.get('category') 
-
-    
-    if category_filter:
-        articles = articles.filter(category=category_filter)
-    if search_query:
-        articles = articles.filter(title__icontains=search_query)
-    if price_min:
-        articles = articles.filter(price__gte=price_min)
-    if price_max:
-        articles = articles.filter(price__lte=price_max)
-
-    articles = articles.order_by('-published_at')
-    return render(request, "main/index.html", {'articles': articles})
 
 def regulamin(request):
     return render(request, "main/regulamin.html")
