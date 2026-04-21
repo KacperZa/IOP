@@ -31,7 +31,7 @@
             transform: scale(1.03);
         }
 
-        img{ 
+       .images{ 
             max-width: 250px; 
             height: auto; 
             border-radius: 5px;
@@ -137,7 +137,7 @@
                 {# WYŚWIETLANIE ZDJĘCIA #}
                 
                     <div class="image-container">
-                        <img src="{% if article.image %}{{ article.image }} {% else %} ../../static/main/img/default_img.png{% endif %}" alt="{{ article.title }}" loading= "lazy" >
+                        <img class ="images" src="{% if article.image %}{{ article.image }} {% else %} ../../static/main/img/default_img.png{% endif %}" alt="{{ article.title }}" loading= "lazy" >
                     </div>
                 <div class="text">
                     <h3><a href="/news/{{ article.id }}" class="title">{{ article.title|upper }}</a></h3>
