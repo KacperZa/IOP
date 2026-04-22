@@ -29,8 +29,8 @@
         {% if request.user.is_authenticated %}
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle text-white d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-              {% if request.user.profile.avatar %}
-                  <img src="{{ request.user.profile.avatar.url }}" alt="Avatar" width="32" height="32" class="rounded-circle me-2 "id="pfp">
+              {% if request.user.profile.avatar_url %}
+                  <img src="{{ request.user.profile.avatar_url }}" alt="Avatar" width="32" height="32" class="rounded-circle me-2 "id="pfp">
               {% else %}
                   <img src="https://github.com/mdo.png" alt="Avatar" width="32" height="32" class="rounded-circle me-2"id="pfp">
               {% endif %}

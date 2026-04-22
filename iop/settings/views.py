@@ -1,15 +1,22 @@
+import uuid
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from news.models import Articles
+from .forms import ProfileForm, AvatarForm
+from supabase_client import supabase 
 
 # Create your views here.
 #settings page
 @login_required
 def settings(request):
-    return render(request, 'settings/settings.html')
+    profile = request.user.profile
+    print("avatar_url w settings view:", profile.avatar_url)
+
+    return render(request, 'settings/settings.html', {'profile': profile})
 
 # Password change
 @login_required
@@ -64,11 +71,36 @@ def change_username(request):
 # PFP change
 @login_required
 def change_avatar(request):
-    if request.method == 'POST' and request.FILES.get('avatar'):
-        profile = request.user.profile
-        profile.avatar = request.FILES['avatar']
-        profile.save()
-        messages.success(request, 'Profile picture updated.')
+    profile = request.user.profile
+
+    if request.method == 'POST':
+    #     profile_form = ProfileForm(request.POST, instance=profile)
+    #     avatar_form = AvatarForm(request.FILES)
+    #     print("avatar_form errors:", avatar_form.errors)
+    #     print("avatar_form valid:", avatar_form.is_valid())
+    #     print("FILES", request.FILES)
+
+    #     if profile_form.is_valid():
+    #         profile_form.save()
+
+        if 'avatar' in request.FILES:
+            file = request.FILES['avatar']
+            ext = file.name.split('.')[-1]
+            filename = f"{request.user.id}/{uuid.uuid4()}.{ext}"
+
+            supabase.storage.from_('avatars').upload(
+                filename,
+                file.read(),
+                {"content-type": file.content_type}
+            )
+            print("przed: ", profile.avatar_url)
+            url = supabase.storage.from_('avatars').get_public_url(filename)
+            profile.avatar_url = url 
+            profile.save()
+            print("avatar save: ", profile.avatar_url)
+            
+            # print("po: ", profile.objects.get(user=request.user).avatar_url)
+
     return redirect('settings')
 
 def user_profile(request, username):

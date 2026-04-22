@@ -117,6 +117,9 @@ def register(request):
         user = User.objects.create_user(
             request.POST["username"], request.POST["email"], request.POST["password"]
         )
+        user.profile.gender = request.POST["gender"]
+        user.profile.age = request.POST["age"]
+        user.profile.save()
         login(request, user)
         return redirect("home")
 
