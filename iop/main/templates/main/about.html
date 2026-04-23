@@ -1,13 +1,454 @@
+
 {% extends 'main/layout/layout.html' %}
 
-{% block title%}About us{% endblock %}
+{% block title %}O nas{% endblock %}
 
-{% block content%}
-    <div class="features">
-        <h1>About us</h1>
-        <p>Lorem ipsum dolor sit amet</p>
-        <button class="btn btn-success">Dangerous button</button>
-    </div>
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
+<style>
+    .about-page { font-family: 'DM Sans', sans-serif; }
 
+    /* HERO */
+    .about-hero {
+        background: #0f1923;
+        color: #fff;
+        padding: 100px 0 80px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: -120px; right: -120px;
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(0, 180, 120, 0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .about-hero::after {
+        content: '';
+        position: absolute;
+        bottom: -100px; left: -80px;
+        width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(0, 120, 255, 0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .hero-tag {
+        display: inline-block;
+        background: rgba(0,180,120,0.15);
+        color: #00b478;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 6px 16px;
+        border-radius: 100px;
+        border: 1px solid rgba(0,180,120,0.3);
+        margin-bottom: 1.5rem;
+    }
+
+    .about-hero h1 {
+        font-family: 'Syne', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+    }
+
+    .about-hero h1 span {
+        color: #00b478;
+    }
+
+    .about-hero p {
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: #8a9bb0;
+        max-width: 520px;
+        line-height: 1.7;
+    }
+
+    .hero-stats {
+        display: flex;
+        gap: 2.5rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-stat-number {
+        font-family: 'Syne', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .hero-stat-label {
+        font-size: 0.8rem;
+        color: #8a9bb0;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    /* MISJA */
+    .about-mission {
+        padding: 90px 0;
+        background: #fff;
+    }
+
+    .section-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #00b478;
+        margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+        font-family: 'Syne', sans-serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        color: #0f1923;
+        line-height: 1.15;
+    }
+
+    .mission-card {
+        background: #f8fafb;
+        border-radius: 16px;
+        padding: 2rem;
+        height: 100%;
+        border: 1px solid #eef1f4;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .mission-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .mission-icon {
+        width: 48px; height: 48px;
+        border-radius: 12px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .icon-green  { background: rgba(0,180,120,0.1); }
+    .icon-blue   { background: rgba(0,120,255,0.1); }
+    .icon-orange { background: rgba(255,120,0,0.1); }
+
+    .mission-card h5 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #0f1923;
+        margin-bottom: 0.6rem;
+    }
+
+    .mission-card p {
+        font-size: 0.9rem;
+        color: #6b7a8d;
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* ZESPÓŁ */
+    .about-team {
+        background: #0f1923;
+        padding: 90px 0;
+    }
+
+    .about-team .section-title { color: #fff; }
+    .about-team .section-label { color: #00b478; }
+
+    .team-card {
+        background: #1a2535;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #253040;
+        transition: transform 0.2s;
+    }
+
+    .team-card:hover { transform: translateY(-4px); }
+
+    .team-avatar {
+        width: 100%;
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Syne', sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .team-info { padding: 1.25rem; }
+
+    .team-info h6 {
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.25rem;
+    }
+
+    .team-info small {
+        color: #00b478;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    /* WARTOŚCI */
+    .about-values {
+        padding: 90px 0;
+        background: #fff;
+    }
+
+    .value-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 2rem 0;
+        border-bottom: 1px solid #eef1f4;
+    }
+
+    .value-row:last-child { border-bottom: none; }
+
+    .value-number {
+        font-family: 'Syne', sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        color: #eef1f4;
+        line-height: 1;
+        min-width: 70px;
+    }
+
+    .value-content h5 {
+        font-family: 'Syne', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0f1923;
+        margin-bottom: 0.4rem;
+    }
+
+    .value-content p {
+        font-size: 0.9rem;
+        color: #6b7a8d;
+        line-height: 1.65;
+        margin: 0;
+    }
+
+    /* CTA */
+    .about-cta {
+        background: linear-gradient(135deg, #00b478 0%, #0078ff 100%);
+        padding: 80px 0;
+        text-align: center;
+        color: #fff;
+    }
+
+    .about-cta h2 {
+        font-family: 'Syne', sans-serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    .about-cta p {
+        font-size: 1rem;
+        opacity: 0.85;
+        margin-bottom: 2rem;
+    }
+
+    .btn-cta {
+        background: #fff;
+        color: #0f1923;
+        font-weight: 600;
+        padding: 0.85rem 2.5rem;
+        border-radius: 100px;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: inline-block;
+    }
+
+    .btn-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        color: #0f1923;
+    }
+
+    /* ANIMACJE */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+</style>
+
+<div class="about-page">
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="fade-up">
+                <div class="hero-tag">O nas</div>
+                <h1>Polska platforma<br>ogłoszeń <span>bez granic</span></h1>
+                <p>Łączymy kupujących i sprzedających w jednym miejscu. Prosto, bezpiecznie i bez zbędnych komplikacji.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISJA -->
+    <section class="about-mission">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-6">
+                    <div class="section-label">Nasza misja</div>
+                    <h2 class="section-title">Dlaczego powstaliśmy?</h2>
+                </div>
+                <div class="col-lg-6 d-flex align-items-end">
+                    <p class="text-muted" style="font-size:0.95rem; line-height:1.7;">
+                        Chcieliśmy stworzyć miejsce, gdzie każdy może łatwo kupić lub sprzedać cokolwiek — bez prowizji, bez skomplikowanych procedur, bez bariery wejścia.
+                    </p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 fade-up">
+                    <div class="mission-card">
+                        <div class="mission-icon icon-green">🤝</div>
+                        <h5>Zaufanie</h5>
+                        <p>Budujemy społeczność opartą na wzajemnym szacunku i transparentności. Profile użytkowników i system ocen pomagają podejmować pewne decyzje.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-up delay-1">
+                    <div class="mission-card">
+                        <div class="mission-icon icon-blue">⚡</div>
+                        <h5>Prostota</h5>
+                        <p>Dodanie ogłoszenia zajmuje mniej niż minutę. Intuicyjny interfejs sprawia, że każdy — niezależnie od wieku czy doświadczenia — poradzi sobie bez problemu.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-up delay-2">
+                    <div class="mission-card">
+                        <div class="mission-icon icon-orange">🛡️</div>
+                        <h5>Bezpieczeństwo</h5>
+                        <p>Dane użytkowników są chronione. Regularnie moderujemy ogłoszenia i reagujemy na zgłoszenia, żeby platforma pozostała bezpieczna dla wszystkich.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ZESPÓŁ -->
+    <section class="about-team">
+        <div class="container">
+            <div class="text-center mb-5">
+                <div class="section-label">Ludzie za projektem</div>
+                <h2 class="section-title">Nasz zespół</h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-6 col-md-3 fade-up">
+                    <div class="team-card">
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #00b478, #0078ff);">B</div>
+                        <div class="team-info">
+                            <h6>Bartłomiej Wrona</h6>
+                            <small>Frontend/Design</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 fade-up delay-1">
+                    <div class="team-card">
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #ff6b35, #ff1177);">M</div>
+                        <div class="team-info">
+                            <h6>Michał Nowak</h6>
+                            <small>Backend</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 fade-up delay-2">
+                    <div class="team-card">
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #7b2ff7, #00b4d8);">K</div>
+                        <div class="team-info">
+                            <h6>Kapcer Zając</h6>
+                            <small>Database</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 fade-up delay-3">
+                    <div class="team-card">
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #f9c74f, #f3722c);">P</div>
+                        <div class="team-info">
+                            <h6>Patryk Bucała</h6>
+                            <small>Frontend</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 fade-up delay-3">
+                    <div class="team-card">
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #e040fb, #00bcd4);">W</div>
+                        <div class="team-info">
+                            <h6>Wiktor Wierzbiński</h6>
+                            <small>Tester</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WARTOŚCI -->
+    <section class="about-values">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="section-label">Co nas wyróżnia</div>
+                    <h2 class="section-title">Nasze wartości</h2>
+                </div>
+                <div class="col-lg-7 offset-lg-1">
+                    <div class="value-row">
+                        <div class="value-number">01</div>
+                        <div class="value-content">
+                            <h5>Lokalność</h5>
+                            <p>Stawiamy na lokalne społeczności. Chcemy, żeby sąsiedzi mogli łatwo handlować między sobą i budować relacje w swoim otoczeniu.</p>
+                        </div>
+                    </div>
+                    <div class="value-row">
+                        <div class="value-number">02</div>
+                        <div class="value-content">
+                            <h5>Ekologia</h5>
+                            <p>Używane przedmioty dostają drugie życie zamiast trafić na śmietnik. Wspieramy gospodarkę obiegu zamkniętego i świadome zakupy.</p>
+                        </div>
+                    </div>
+                    <div class="value-row">
+                        <div class="value-number">03</div>
+                        <div class="value-content">
+                            <h5>Równość</h5>
+                            <p>Platforma jest dostępna dla każdego — bez względu na wiek, region czy doświadczenie technologiczne. Nie pobieramy prowizji od transakcji.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+        <div class="container">
+            <h2>Dołącz do nas już dziś</h2>
+            <p>Tysiące ogłoszeń czeka. Zacznij kupować lub sprzedawać w kilka sekund.</p>
+            <a href="{% url 'news_home' %}" class="btn-cta">Przeglądaj ogłoszenia</a>
+        </div>
+    </section>
+
+</div>
 {% endblock %}
+
+
+
