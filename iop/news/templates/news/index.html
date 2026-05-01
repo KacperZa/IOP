@@ -6,7 +6,7 @@
 <div style="background-color: #0a0a0a; min-height: 100vh; color: white; padding: 40px 20px;">
     <div style="max-width: 1200px; margin: 0 auto;">
         
-        <div style="margin-bottom: 40px;">
+        <div style="margin-bottom: 40px;" class="header-text">
             <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px;">Wszystkie Ogłoszenia</h1>
             <p style="color: #666;">Przeglądaj oferty na IOP</p>
         </div>
@@ -71,6 +71,33 @@
 </div>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", (event) => {
+
+    gsap.fromTo('.header-text',
+    {
+        x: -40,
+        opacity: 0
+    },
+    {
+        x: 0,
+        opacity: 1
+    }
+    )
+        gsap.fromTo('.ad-card', 
+        {
+            x:-50,
+            opacity: 0,
+        },
+        {
+            x: 0,
+            opacity: 1,
+            stagger: 0.1,
+            ease: "back.in"
+        }
+        )
+    });
+
 document.querySelectorAll('.btn-ulubione').forEach(function(btn) {
     btn.addEventListener('click', function(e){
         e.preventDefault();
