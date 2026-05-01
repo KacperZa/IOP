@@ -1,4 +1,3 @@
-
 {% extends 'main/layout/layout.html' %}
 
 {% block title %}O nas{% endblock %}
@@ -7,12 +6,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-    .about-page { font-family: 'DM Sans', sans-serif; }
+    .about-page { font-family: 'DM Sans', sans-serif; background-color: #121212; }
 
     /* HERO */
     .about-hero {
-        background: #0f1923;
-        color: #fff;
+        background: #121212;
+        color: #f2f3f5;
         padding: 100px 0 80px;
         position: relative;
         overflow: hidden;
@@ -23,7 +22,7 @@
         position: absolute;
         top: -120px; right: -120px;
         width: 500px; height: 500px;
-        background: radial-gradient(circle, rgba(0, 180, 120, 0.15) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(88, 101, 242, 0.15) 0%, transparent 70%);
         pointer-events: none;
     }
 
@@ -32,21 +31,21 @@
         position: absolute;
         bottom: -100px; left: -80px;
         width: 400px; height: 400px;
-        background: radial-gradient(circle, rgba(0, 120, 255, 0.1) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(202, 158, 255, 0.1) 0%, transparent 70%);
         pointer-events: none;
     }
 
     .hero-tag {
         display: inline-block;
-        background: rgba(0,180,120,0.15);
-        color: #00b478;
+        background: rgba(88, 101, 242, 0.15);
+        color: #ca9eff; 
         font-size: 0.75rem;
-        font-weight: 500;
+        font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
         padding: 6px 16px;
         border-radius: 100px;
-        border: 1px solid rgba(0,180,120,0.3);
+        border: 1px solid rgba(88, 101, 242, 0.3);
         margin-bottom: 1.5rem;
     }
 
@@ -54,18 +53,18 @@
         font-family: 'Syne', sans-serif;
         font-size: clamp(2.5rem, 6vw, 4.5rem);
         font-weight: 800;
-        line-height: 1.05;
-        margin-bottom: 1.5rem;
+        padding-bottom: 20px;
+        color: #f2f3f5;
     }
 
     .about-hero h1 span {
-        color: #00b478;
+        color: #ca9eff; 
     }
 
     .about-hero p {
         font-size: 1.1rem;
-        font-weight: 300;
-        color: #8a9bb0;
+        font-weight: 400;
+        color: #b5bac1; 
         max-width: 520px;
         line-height: 1.7;
     }
@@ -81,12 +80,12 @@
         font-family: 'Syne', sans-serif;
         font-size: 2rem;
         font-weight: 800;
-        color: #fff;
+        color: #f2f3f5;
     }
 
     .hero-stat-label {
         font-size: 0.8rem;
-        color: #8a9bb0;
+        color: #b5bac1;
         text-transform: uppercase;
         letter-spacing: 0.08em;
     }
@@ -94,15 +93,15 @@
     /* MISJA */
     .about-mission {
         padding: 90px 0;
-        background: #fff;
+        background: #1e1f22; 
     }
 
     .section-label {
         font-size: 0.75rem;
-        font-weight: 500;
+        font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #00b478;
+        color: #ca9eff; 
         margin-bottom: 0.75rem;
     }
 
@@ -110,22 +109,22 @@
         font-family: 'Syne', sans-serif;
         font-size: clamp(1.8rem, 4vw, 2.8rem);
         font-weight: 800;
-        color: #0f1923;
+        color: #f2f3f5;
         line-height: 1.15;
     }
 
     .mission-card {
-        background: #f8fafb;
+        background: #313338; 
         border-radius: 16px;
         padding: 2rem;
         height: 100%;
-        border: 1px solid #eef1f4;
+        border: 1px solid #282828;
         transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .mission-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.3); 
     }
 
     .mission-icon {
@@ -136,43 +135,43 @@
         margin-bottom: 1.2rem;
     }
 
-    .icon-green  { background: rgba(0,180,120,0.1); }
-    .icon-blue   { background: rgba(0,120,255,0.1); }
-    .icon-orange { background: rgba(255,120,0,0.1); }
+    .icon-blurple  { background: rgba(88, 101, 242, 0.15); color: #5865F2; }
+    .icon-purple   { background: rgba(202, 158, 255, 0.15); color: #ca9eff; }
+    .icon-pink     { background: rgba(235, 69, 158, 0.15); color: #eb459e; }
 
     .mission-card h5 {
         font-family: 'Syne', sans-serif;
         font-size: 1.1rem;
         font-weight: 700;
-        color: #0f1923;
+        color: #f2f3f5;
         margin-bottom: 0.6rem;
     }
 
     .mission-card p {
         font-size: 0.9rem;
-        color: #6b7a8d;
+        color: #dbdee1;
         line-height: 1.65;
         margin: 0;
     }
 
     /* ZESPÓŁ */
     .about-team {
-        background: #0f1923;
+        background: #121212;
         padding: 90px 0;
     }
 
-    .about-team .section-title { color: #fff; }
-    .about-team .section-label { color: #00b478; }
+    .about-team .section-title { color: #f2f3f5; }
+    .about-team .section-label { color: #ca9eff; }
 
     .team-card {
-        background: #1a2535;
+        background: #313338;
         border-radius: 16px;
         overflow: hidden;
-        border: 1px solid #253040;
+        border: 1px solid #282828;
         transition: transform 0.2s;
     }
 
-    .team-card:hover { transform: translateY(-4px); }
+    .team-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
 
     .team-avatar {
         width: 100%;
@@ -191,21 +190,22 @@
     .team-info h6 {
         font-family: 'Syne', sans-serif;
         font-weight: 700;
-        color: #fff;
+        color: #f2f3f5;
         margin-bottom: 0.25rem;
     }
 
     .team-info small {
-        color: #00b478;
+        color: #ca9eff; 
         font-size: 0.78rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
+        font-weight: 700;
     }
 
     /* WARTOŚCI */
     .about-values {
         padding: 90px 0;
-        background: #fff;
+        background: #1e1f22;
     }
 
     .value-row {
@@ -213,38 +213,38 @@
         align-items: flex-start;
         gap: 1.5rem;
         padding: 2rem 0;
-        border-bottom: 1px solid #eef1f4;
+        border-bottom: 1px solid #313338;
     }
 
     .value-row:last-child { border-bottom: none; }
 
     .value-number {
         font-family: 'Syne', sans-serif;
-        font-size: 3rem;
+        font-size: 2rem;
         font-weight: 800;
-        color: #eef1f4;
+        color: #ca9eff; 
         line-height: 1;
         min-width: 70px;
+        padding: 20px;
     }
 
     .value-content h5 {
         font-family: 'Syne', sans-serif;
         font-size: 1.2rem;
         font-weight: 700;
-        color: #0f1923;
+        color: #f2f3f5;
         margin-bottom: 0.4rem;
     }
 
     .value-content p {
         font-size: 0.9rem;
-        color: #6b7a8d;
+        color: #dbdee1;
         line-height: 1.65;
         margin: 0;
     }
 
     /* CTA */
     .about-cta {
-        background: linear-gradient(135deg, #00b478 0%, #0078ff 100%);
         padding: 80px 0;
         text-align: center;
         color: #fff;
@@ -259,14 +259,14 @@
 
     .about-cta p {
         font-size: 1rem;
-        opacity: 0.85;
+        opacity: 0.9;
         margin-bottom: 2rem;
     }
 
     .btn-cta {
         background: #fff;
-        color: #0f1923;
-        font-weight: 600;
+        color: #121212;
+        font-weight: 700;
         padding: 0.85rem 2.5rem;
         border-radius: 100px;
         text-decoration: none;
@@ -277,8 +277,7 @@
 
     .btn-cta:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        color: #0f1923;
+        color: #ca9eff;
     }
 
     /* ANIMACJE */
@@ -295,7 +294,6 @@
 
 <div class="about-page">
 
-    <!-- HERO -->
     <section class="about-hero">
         <div class="container">
             <div class="fade-up">
@@ -306,7 +304,6 @@
         </div>
     </section>
 
-    <!-- MISJA -->
     <section class="about-mission">
         <div class="container">
             <div class="row mb-5">
@@ -315,7 +312,7 @@
                     <h2 class="section-title">Dlaczego powstaliśmy?</h2>
                 </div>
                 <div class="col-lg-6 d-flex align-items-end">
-                    <p class="text-muted" style="font-size:0.95rem; line-height:1.7;">
+                    <p style="color: #b5bac1; font-size:0.95rem; line-height:1.7;">
                         Chcieliśmy stworzyć miejsce, gdzie każdy może łatwo kupić lub sprzedać cokolwiek — bez prowizji, bez skomplikowanych procedur, bez bariery wejścia.
                     </p>
                 </div>
@@ -323,21 +320,21 @@
             <div class="row g-4">
                 <div class="col-md-4 fade-up">
                     <div class="mission-card">
-                        <div class="mission-icon icon-green">🤝</div>
+                        <div class="mission-icon icon-blurple">🤝</div>
                         <h5>Zaufanie</h5>
                         <p>Budujemy społeczność opartą na wzajemnym szacunku i transparentności. Profile użytkowników i system ocen pomagają podejmować pewne decyzje.</p>
                     </div>
                 </div>
                 <div class="col-md-4 fade-up delay-1">
                     <div class="mission-card">
-                        <div class="mission-icon icon-blue">⚡</div>
+                        <div class="mission-icon icon-purple">⚡</div>
                         <h5>Prostota</h5>
                         <p>Dodanie ogłoszenia zajmuje mniej niż minutę. Intuicyjny interfejs sprawia, że każdy — niezależnie od wieku czy doświadczenia — poradzi sobie bez problemu.</p>
                     </div>
                 </div>
                 <div class="col-md-4 fade-up delay-2">
                     <div class="mission-card">
-                        <div class="mission-icon icon-orange">🛡️</div>
+                        <div class="mission-icon icon-pink">🛡️</div>
                         <h5>Bezpieczeństwo</h5>
                         <p>Dane użytkowników są chronione. Regularnie moderujemy ogłoszenia i reagujemy na zgłoszenia, żeby platforma pozostała bezpieczna dla wszystkich.</p>
                     </div>
@@ -346,7 +343,6 @@
         </div>
     </section>
 
-    <!-- ZESPÓŁ -->
     <section class="about-team">
         <div class="container">
             <div class="text-center mb-5">
@@ -356,7 +352,7 @@
             <div class="row g-4 justify-content-center">
                 <div class="col-6 col-md-3 fade-up">
                     <div class="team-card">
-                        <div class="team-avatar" style="background: linear-gradient(135deg, #00b478, #0078ff);">B</div>
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #5865F2, #4752c4);">B</div>
                         <div class="team-info">
                             <h6>Bartłomiej Wrona</h6>
                             <small>Frontend/Design</small>
@@ -365,7 +361,7 @@
                 </div>
                 <div class="col-6 col-md-3 fade-up delay-1">
                     <div class="team-card">
-                        <div class="team-avatar" style="background: linear-gradient(135deg, #ff6b35, #ff1177);">M</div>
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #ca9eff, #5865F2);">M</div>
                         <div class="team-info">
                             <h6>Michał Nowak</h6>
                             <small>Front/Backend</small>
@@ -374,7 +370,7 @@
                 </div>
                 <div class="col-6 col-md-3 fade-up delay-2">
                     <div class="team-card">
-                        <div class="team-avatar" style="background: linear-gradient(135deg, #7b2ff7, #00b4d8);">K</div>
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #9b59b6, #5865F2);">K</div>
                         <div class="team-info">
                             <h6>Kapcer Zając</h6>
                             <small>Backend</small>
@@ -383,7 +379,7 @@
                 </div>
                 <div class="col-6 col-md-3 fade-up delay-3">
                     <div class="team-card">
-                        <div class="team-avatar" style="background: linear-gradient(135deg, #f9c74f, #f3722c);">P</div>
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #5865F2, #ca9eff);">P</div>
                         <div class="team-info">
                             <h6>Patryk Bucała</h6>
                             <small>CEO</small>
@@ -392,7 +388,7 @@
                 </div>
                 <div class="col-6 col-md-3 fade-up delay-3">
                     <div class="team-card">
-                        <div class="team-avatar" style="background: linear-gradient(135deg, #e040fb, #00bcd4);">W</div>
+                        <div class="team-avatar" style="background: linear-gradient(135deg, #e040fb, #5865F2);">W</div>
                         <div class="team-info">
                             <h6>Wiktor Wierzbiński</h6>
                             <small>Tester</small>
@@ -403,7 +399,6 @@
         </div>
     </section>
 
-    <!-- WARTOŚCI -->
     <section class="about-values">
         <div class="container">
             <div class="row">
@@ -438,7 +433,6 @@
         </div>
     </section>
 
-    <!-- CTA -->
     <section class="about-cta">
         <div class="container">
             <h2>Dołącz do nas już dziś</h2>
@@ -449,6 +443,3 @@
 
 </div>
 {% endblock %}
-
-
-
