@@ -129,7 +129,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let tl = gsap.timeline({ defaults: { duration: 0.4, ease: "back.out"}})
     tl.from('.listing-header', { x: -40, opacity: 0})
         .from('.discord-label', { x: 40, opacity: 0  })
-        .from('.form-group', { opacity: 0, duration: 0.5})
+        .from('.form-group:nth-child(even)', { x:-40, opacity: 0, duration: 0.5})
+        .from('.form-group:nth-child(odd)', { x:40, opacity: 0, duration: 0.5}, "<")
         .fromTo('.btn-publish', { opacity: 0}, { opacity: 1, duration: 0.3})
  });
 </script>
