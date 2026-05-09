@@ -117,6 +117,9 @@ def register(request):
         user = User.objects.create_user(
             request.POST["username"], request.POST["email"], request.POST["password"]
         )
+        user.profile.gender = request.POST["gender"]
+        user.profile.age = request.POST["age"]
+        user.profile.save()
         login(request, user)
         return redirect("home")
 
@@ -134,3 +137,11 @@ def contact(request):
 
 def regulamin(request):
     return render(request, "main/regulamin.html")
+
+@login_required
+def favourites(request):
+    fav_ids = list(
+        request.user.ulubione.values_list('ogloszenie_id', flat=True)
+    )
+    news = Articles.objects.filter(id__in=fav_ids).order_by('-published_at')
+    return render(request, 'main/favourites.html', {'news': news, 'user_ulubione_ids': fav_ids})

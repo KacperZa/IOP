@@ -101,6 +101,7 @@
         </div>
         {% endif %}
 
+            
         <button class="btn-publish" type="submit">
             <span class="material-symbols-outlined">publish</span>
             Opublikuj ogłoszenie
@@ -109,5 +110,29 @@
 </div>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<script>
+
+document.addEventListener("DOMContentLoaded", (event) => {
+
+    gsap.fromTo('.listing-container',
+    {
+        x: -40,
+        opacity: 0
+    },
+    {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+    }
+    )
+    let tl = gsap.timeline({ defaults: { duration: 0.4, ease: "back.out"}})
+    tl.from('.listing-header', { x: -40, opacity: 0})
+        .from('.discord-label', { x: 40, opacity: 0  })
+        .from('.form-group:nth-child(even)', { x:-40, opacity: 0, duration: 0.5})
+        .from('.form-group:nth-child(odd)', { x:40, opacity: 0, duration: 0.5}, "<")
+        .fromTo('.btn-publish', { opacity: 0}, { opacity: 1, duration: 0.3})
+ });
+</script>
 
 {% endblock %}

@@ -23,8 +23,8 @@
                     <h5 class="card-title">Profile Picture</h5>
 
                     <!-- podgląd aktualnego zdjęcia -->
-                    {% if request.user.profile.avatar %}
-                        <img src="{{ request.user.profile.avatar.url }}"
+                    {% if profile.avatar_url %}
+                        <img src="{{ profile.avatar_url }}"
                             class="rounded-circle mb-3"
                             width="80" height="80"
                             style="object-fit: cover; height: none;"

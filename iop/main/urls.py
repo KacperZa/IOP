@@ -19,6 +19,7 @@ urlpatterns = [
     path('ogloszenie/<int:ogloszenie_id>/ulubione/', views.toggle_ulubione, name='toggle_ulubione'),
     path('settings/', include('settings.urls')),
     path('regulamin', views.regulamin, name='regulamin'),
+    path('favourites', views.favourites, name='favourites'),
 
 ]
 
