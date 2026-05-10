@@ -30,7 +30,7 @@ def upload_image(file):
 def news_home(request):
     articles_list = Articles.objects.all().order_by('-published_at')
     
-    paginator = Paginator(articles_list, 6) 
+    paginator = Paginator(articles_list, 9) 
     page_number = request.GET.get('page')
     news = paginator.get_page(page_number)
     
