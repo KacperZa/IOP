@@ -138,6 +138,9 @@ def contact(request):
 def regulamin(request):
     return render(request, "main/regulamin.html")
 
+def privacy(request):
+    return render(request, "main/privacy.html")
+
 @login_required
 def favourites(request):
     fav_ids = list(
