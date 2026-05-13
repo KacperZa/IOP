@@ -179,6 +179,20 @@
         {% endfor %}
         {# SKRYPT DLA ULUBIONYCH #}
             <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
+                gsap.fromTo('.card',
+                 {
+                    x:-50,
+                    opacity: 0,
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    stagger: 0.15,
+                    ease: "back.in"
+                }
+                )
+            })
                 document.querySelectorAll('.btn-ulubione').forEach(function(btn) {
                     btn.addEventListener('click', function(){
                     const id = btn.dataset.id;
