@@ -1,233 +1,299 @@
 {% extends 'main/layout/layout.html' %}
+{% load static %}
 
 {% block title %}Moje ogłoszenia{% endblock %}
 
 {% block content %}
+<style>
+    Oto gotowy, przerobiony kod CSS przygotowany specjalnie pod markę RA BUZZ.
 
-    <style>
-        h1{
-            text-align: center;
-            padding: 0.75rem;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .card{
-            background-color: #949ba4;
-            padding: 1rem;
-            border-radius: 0.25rem;
-            border-style: 0
-            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-            display: flex;
-            flex-direction: row;
-            gap: 1rem;
-            transition: all 0.2s ease;
-            border: none;
-        }
-        .card:hover{
-            background-color: #ececec;
-            transform: scale(1.03);
-        }
+Wszystkie niebieskie akcenty (#4c6ef5) zamieniłem na Twój markowy, jaskrawy fiolet (#ca9eff), a szare tła kart zastąpiłem głęboką czernią/ciemnym grafitem pasującym do strony głównej.
 
-       .images{ 
-            max-width: 250px; 
-            height: auto; 
-            border-radius: 5px;
-        }
-        .image-container{
-            display:flex;
-            flex:1;
-        }
-        .title{
-            text-decoration: none;
-            color: #181818;
-            font-weight: 700;
+Podmień całą sekcję <style> w swoim pliku na tę poniższą:
 
-        }
-        .text{
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex: 8;
-        }
-        .prize{
-            display: flex;
-            flex-direction: column;
-            flex:1;
-        }
-        .prize p{
-            flex: 9;
-            align-self: flex-end;
-        }
-        .category{
-            color: #6c757d;
-        }
-        .views, .favourite{
-            display: flex;
-            margin-top: auto;
-            align-items: center;
-            gap: 0.25rem;
-        }
-        .statistics{
-            display:flex;
-            flex-direction: row;
-            gap: 0.5rem;
-        }
+HTML
+<style>
+    /* Główny kontener strony - dopasowany do ciemnego motywu */
+    .listings-body {
+        background-color: #121212;
+        color: #e0e0e0;
+        padding: 2rem 0;
+        min-height: 100vh;
+    }
 
-        .info{
-            display:flex;
-            flex-direction: column;
-            flex: 1;
-            gap: 0.25rem;
-        }
-        .info p{
-            margin: 0;
-        }
-        #edit{
-            background-color:#5ab75c;
-            transition: background-color 0.2s ease;
-        }
-        #edit:hover{
-            background-color:#54a155;
-        }
-        #delete{
-            background-color:#da4f4a;
-            transition: background-color 0.2s ease
-        }
-        #delete:hover{    
-            background-color:#BA443F;
-        }
-        #edit, #delete{
-            width: ;
-        }
-        .buttons{
-            display: flex;
-            flex-direction: row;
-            align-self: flex-end;
-            gap: 0.25rem;
-            flex: 1;
-        }
-        .btn-ulubione{
-            cursor: pointer;
-            width: fit-content;
-            user-select: none
-        }
-        {# ANIMACJA SERCA #}
-        #heart{
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s ease;
-        }
-        #heart:active{
-            transform: scale(0.9);
-            transition: transform 0.1s ease;
-        }
+    /* Karty statystyk na górze */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
 
-        
-    </style>
-    <div class="main-container">
-    <h1>Moje ogłoszenia</h1>
-    <div class="">
-    {% if news %}
-        <div class="container">
-        {% for article in news %}
-            <div class="card">
-                {# WYŚWIETLANIE ZDJĘCIA #}
-                
-                    <div class="image-container">
-                        <img class ="images" src="{% if article.image %}{{ article.image }} {% else %} ../../static/main/img/default_img.png{% endif %}" alt="{{ article.title }}" loading= "lazy" >
+    .stat-card {
+        background-color: #1a1a1a;
+        border: 1px solid #2d2d2d;
+        border-radius: 12px;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-card h3 { color: #888; font-size: 0.9rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+    .stat-card .value { font-size: 2rem; font-weight: 800; color: #fff; }
+
+    /* Nowoczesna Karta Ogłoszenia w głębokiej czerni */
+    .listing-card {
+        background-color: #1a1a1a;
+        border: 1px solid #2d2d2d;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Hover karty z fioletowym podświetleniem z RA BUZZ */
+    .listing-card:hover {
+        background-color: #222222;
+        transform: translateY(-5px);
+        border-color: #ca9eff;
+        box-shadow: 0 10px 30px rgba(202, 158, 255, 0.2);
+    }
+
+    .listing-card:hover .ad-title {
+        color: #ca9eff !important;
+    }
+
+    .image-wrapper {
+        width: 280px;
+        min-width: 280px;
+        position: relative;
+    }
+
+    .listing-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .status-badge {
+        position: absolute; top: 12px; left: 12px;
+        background: #bb86fc; color: #000; padding: 4px 12px;
+        border-radius: 20px; font-size: 0.75rem; font-weight: 800;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Treść karty */
+    .card-info {
+        flex: 1;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ad-title {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        transition: color 0.2s;
+    }
+
+    .ad-title:hover { color: #e0bfff; }
+
+    .ad-excerpt { color: #aaa; font-size: 0.95rem; line-height: 1.5; }
+
+    .category-tag {
+        font-size: 0.75rem;
+        color: #ca9eff;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    /* Statystyki dolne */
+    .ad-stats {
+        margin-top: auto;
+        display: flex;
+        gap: 1.5rem;
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .ad-stats span { display: flex; align-items: center; gap: 6px; }
+
+    /* Prawy panel akcji */
+    .action-panel {
+        width: 220px;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-left: 1px solid #2d2d2d;
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    /* Cena podświetlona na fioletowo */
+    .price-display {
+        color: #ca9eff;
+        font-size: 1.8rem;
+        font-weight: 800;
+        text-align: right;
+    }
+
+    .btn-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Stylizacja przycisków akcji */
+    .btn-custom {
+        padding: 10px;
+        border-radius: 12px;
+        font-weight: 800;
+        text-decoration: none;
+        text-align: center;
+        font-size: 0.85rem;
+        transition: 0.3s;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* Fioletowy przycisk edycji pasujący do daButton */
+    .btn-edit { background-color: #ca9eff; color: black; }
+    .btn-edit:hover { background-color: #e0bfff; transform: scale(1.05); }
+    
+    .btn-view { background-color: transparent; color: white; border: 1px solid #333; }
+    .btn-view:hover { background-color: #2d2d2d; border-color: #bb86fc; }
+
+    .btn-delete { background-color: rgba(255, 51, 102, 0.1); color: #ff3366; border: 1px solid #ff3366; }
+    .btn-delete:hover { background-color: #ff3366; color: white; transform: scale(1.02); }
+
+    .btn-promote { background-color: #2b8a3e; color: white; }
+    .btn-promote:hover { background-color: #216a2f; }
+
+    /* Serce z animacją z Twojej strony głównej */
+    .heart-icon {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.3s ease;
+        pointer-events: none;
+    }
+    .btn-ulubione:active .heart-icon {
+        transform: scale(0.7);
+        transition: transform 0.1s ease;
+    }
+    .btn-ulubione:hover .heart-icon {
+        transform: scale(1.2);
+    }
+</style>
+
+<div class="listings-body">
+    <div class="container">
+        <h1 class="text-white fw-bold mb-1 text-start">My Listings</h1>
+        <p class="text-secondary mb-5">Zarządzaj swoimi aktywnymi ogłoszeniami i śledź statystyki popularności.</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div><h3>Total Listings</h3><div class="value">{{ news|length }}</div></div>
+                <span class="material-symbols-outlined" style="color: #00d2ff; font-size: 40px; text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);">inventory_2</span>
+            </div>
+            <div class="stat-card">
+                <div><h3>Total Views</h3><div class="value">{{ total_views_sum }}</div></div>
+                <span class="material-symbols-outlined" style="color: #00ff66; font-size: 40px; text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);">visibility</span>
+            </div>
+            <div class="stat-card">
+                <div><h3>Favorites</h3><div class="value">{{ total_favs_sum }}</div></div>
+                <span class="material-symbols-outlined" style="color: #ff3366; font-size: 40px; text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);">favorite</span>
+            </div>
+        </div>
+
+        {% if news %}
+            <div class="listings-wrapper">
+                {% for article in news %}
+                <div class="listing-card" id="ad-{{ article.id }}">
+                    <div class="image-wrapper">
+                        <img class="listing-img" src="{% if article.image %}{{ article.image }}{% else %}{% static 'main/img/default_img.png' %}{% endif %}" alt="{{ article.title }}">
+                        <span class="status-badge">ACTIVE</span>
                     </div>
-                <div class="text">
-                    <h3><a href="/news/{{ article.id }}" class="title">{{ article.title|upper }}</a></h3>
-                    <div class="info">
-                        <p class="text">{{ article.excerpt|truncatewords:10}}</p>
-                        <p class="category"><small>Kategoria: {{ article.get_category_display }}</small></p>
-                        <div class="statistics">
-                            <p class="views"><span class="material-symbols-outlined">visibility</span> {{article.views}}</p>
-                            
-                            {# ULUBIONE #}
-                                <p class="favourite">
-                                    <a class="btn-ulubione" data-id="{{ article.id }}">
-                                        {% if article.id in user_ulubione_ids %}
-                                            <svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="#f00" stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                            </svg>
-                                        {% else %}
-                                            <svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="#CBCFD2" stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                            </svg>
-                                        {% endif %}
-                                    </a>
-                                    <span id="liczba-ulubione-{{ article.id }}"> {{ article.ulubione.count }}</span>
-                                </p>
+
+                    <div class="card-info">
+                        <span class="category-tag">{{ article.get_category_display }}</span>
+                        <a href="/news/{{ article.id }}" class="ad-title">{{ article.title|upper }}</a>
+                        <p class="ad-excerpt">{{ article.excerpt|truncatewords:15 }}</p>
+
+                        <div class="ad-stats">
+                            <span><span class="material-symbols-outlined" style="font-size: 18px;">visibility</span> {{ article.views }} views</span>
+                            <span class="btn-ulubione" data-id="{{ article.id }}" style="cursor:pointer; display: flex; align-items: center; gap: 5px;">
+                                {% if article.id in user_ulubione_ids %}
+                                    <svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#f00" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+                                {% else %}
+                                    <svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#5c5f66" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+                                {% endif %}
+                                <span id="liczba-ulubione-{{ article.id }}">{{ article.ulubione.count }}</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="action-panel">
+                        <div class="price-display">{{ article.price }} zł</div>
+                        <div class="btn-stack">
+                            <a href="/news/{{ article.id }}/update" class="btn-custom btn-edit"></i> Edytuj</a>
+                            <a href="/news/{{ article.id }}" class="btn-custom btn-view">wyświetl</a>
+                            <a href="/news/{{ article.id }}/delete" class="btn-custom btn-delete">usuń</a>
+                           <a href="https://www.facebook.com" target="_blank" class="btn-custom btn-promote"> udostępnij</a>
                         </div>
                     </div>
                 </div>
-                
-                {# WYŚWIETLANIE CENY #}
-                <div class="prize">
-                    <p class="mb-1"><strong>Cena: {{ article.price }} zł</strong></p>
-                    <div class="buttons">
-                        <a href="/news/{{ article.id }}/update" class="btn" id="edit">Edytuj</a>
-                        <a href="/news/{{ article.id }}/delete" class="btn" id="delete">Usuń</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-            
-        {% endfor %}
-        {# SKRYPT DLA ULUBIONYCH #}
-            <script>
-            document.addEventListener("DOMContentLoaded", (event) => {
-                gsap.fromTo('.card',
-                 {
-                    x:-50,
-                    opacity: 0,
-                },
-                {
-                    x: 0,
-                    opacity: 1,
-                    stagger: 0.15,
-                    ease: "back.in"
-                }
-                )
-            })
-                document.querySelectorAll('.btn-ulubione').forEach(function(btn) {
-                    btn.addEventListener('click', function(){
-                    const id = btn.dataset.id;
-                    const serce = btn;
-
-
-                    fetch(`/ogloszenie/${id}/ulubione/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken':'{{ csrf_token }}',
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        serce.innerHTML = data.ulubione ?
-                        `<svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path fill="#f00" stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>`
-                        : 
-                        `<svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path fill="#CBCFD2" stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>`;
-                        document.getElementById(`liczba-ulubione-${id}`).textContent = data.liczba;
-                    });
-                });
-            });
-            </script>
-        </div>
-    {% else %}
-
-        <p>Obecnie nie ma żadnych ogłoszeń. Dodaj coś!</p>
-
-    {% endif %}
-        
+        {% else %}
+            <div class="text-center p-5 bg-dark rounded border border-secondary">
+                <p class="text-secondary fs-5">Nie masz jeszcze żadnych ogłoszeń.</p>
+                <a href="/news/create" class="btn btn-primary px-4 py-2">Dodaj ogłoszenie</a>
+            </div>
+        {% endif %}
     </div>
 </div>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=visibility" />
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        
+        gsap.from('.listing-card', {
+            x: -40,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+
+        
+        document.querySelectorAll('.btn-ulubione').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const heartSvg = this.querySelector('path');
+
+                fetch(`/ogloszenie/${id}/ulubione/`, {
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    heartSvg.setAttribute('fill', data.ulubione ? "#f00" : "#5c5f66");
+                    document.getElementById(`liczba-ulubione-${id}`).textContent = data.liczba;
+                });
+            });
+        });
+    });
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {% endblock %}
