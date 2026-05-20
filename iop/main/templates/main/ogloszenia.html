@@ -5,125 +5,75 @@
 {% block content %}
 
     <style>
-        h1{
-            text-align: center;
-            padding: 0.75rem;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .card{
-            background-color: #949ba4;
-            padding: 1rem;
-            border-radius: 0.25rem;
-            border-style: 0
-            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-            display: flex;
-            flex-direction: row;
-            gap: 1rem;
-            transition: all 0.2s ease;
-            border: none;
-        }
-        .card:hover{
-            background-color: #ececec;
-            transform: scale(1.03);
-        }
+    body { overflow-x: hidden; }
+    
+    .category-card {
+        text-decoration: none; /* Usunięcie podkreślenia linku */
+        background: #181818;
+        border: 1px solid #282828;
+        border-radius: 20px;
+        padding: 25px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .category-card .icon { font-size: 36px; color: #ca9eff; margin-bottom: 12px; }
+    .category-card .name { font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .category-card:hover { border-color: #ca9eff; background: #222; transform: translateY(-5px); }
 
-       .images{ 
-            max-width: 250px; 
-            height: auto; 
-            border-radius: 5px;
-        }
-        .image-container{
-            display:flex;
-            flex:1;
-        }
-        .title{
-            text-decoration: none;
-            color: #181818;
-            font-weight: 700;
+    .daButton {
+        background: #ca9eff;
+        color: black;
+        border: 1px solid #333;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .daButton:hover {
+        background: #282828;
+        color: #ca9eff;
+        border-color: #ca9eff;
+    }
 
-        }
-        .text{
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex: 8;
-        }
-        .prize{
-            display: flex;
-            flex-direction: column;
-            flex:1;
-        }
-        .prize p{
-            flex: 9;
-            align-self: flex-end;
-        }
-        .category{
-            color: #6c757d;
-        }
-        .views, .favourite{
-            display: flex;
-            margin-top: auto;
-            align-items: center;
-            gap: 0.25rem;
-        }
-        .statistics{
-            display:flex;
-            flex-direction: row;
-            gap: 0.5rem;
-        }
+    .daButton.secondary {
+        background: #282828;
+        color: #ca9eff;
+        border: 1px solid #333;
+    }
 
-        .info{
-            display:flex;
-            flex-direction: column;
-            flex: 1;
-            gap: 0.25rem;
-        }
-        .info p{
-            margin: 0;
-        }
-        #edit{
-            background-color:#5ab75c;
-            transition: background-color 0.2s ease;
-        }
-        #edit:hover{
-            background-color:#54a155;
-        }
-        #delete{
-            background-color:#da4f4a;
-            transition: background-color 0.2s ease
-        }
-        #delete:hover{    
-            background-color:#BA443F;
-        }
-        #edit, #delete{
-            width: ;
-        }
-        .buttons{
-            display: flex;
-            flex-direction: row;
-            align-self: flex-end;
-            gap: 0.25rem;
-            flex: 1;
-        }
-        .btn-ulubione{
-            cursor: pointer;
-            width: fit-content;
-            user-select: none
-        }
-        {# ANIMACJA SERCA #}
-        #heart{
-            width: 30px;
-            height: 30px;
-            transition: transform 0.3s ease;
-        }
-        #heart:active{
-            transform: scale(0.9);
-            transition: transform 0.1s ease;
-        }
+    .daButton.secondary:hover {
+        background: #333;
+        border-color: #ca9eff;
+    }
+
+    .ra-card:hover { transform: translateY(-10px); border-color: #ca9eff !important; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+	.category-card, .category-card:hover, .category-card:active, .category-card:focus {
+    text-decoration: none !important; 
+    outline: none !important;         
+    box-shadow: none;                
+}
+
+.category-card .name {
+    text-decoration: none !important;
+}
+
+#heart{
+        width: 30px;
+        height: 30px;
+        transition: transform 0.3s ease;
+}
+#heart:active{
+        transform: scale(0.9);
+        transition: transform 0.1s ease;
+}
 
         
     </style>
@@ -133,37 +83,31 @@
     {% if news %}
         <div class="container">
         {% for article in news %}
-            <div class="card">
-                {# WYŚWIETLANIE ZDJĘCIA #}
-                
-                    <div class="image-container">
-                        <img class ="images" src="{% if article.image %}{{ article.image }} {% else %} ../../static/main/img/default_img.png{% endif %}" alt="{{ article.title }}" loading= "lazy" >
+            <div class="ra-card" style="background: #181818; border-radius: 16px; overflow: hidden; border: 1px solid #282828; transition: 0.3s; position: relative;">
+                <a href="/news/{{ el.id }}">
+                <div style="position: absolute; bottom: 15px; right: 15px; padding: 6px 14px; border-radius: 10px; color: #e7e5e5; font-weight: 800; font-size: 14px; z-index: 2;">
+                    {{ el.price }} zł
+                </div>
+
+                <div style="width: 100%; height: 200px; background: #222; overflow: hidden;">
+                {% if el.image %}
+                    <img src="{{ el.image }}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #333;">
+                        <span class="material-symbols-outlined" style="font-size: 48px;">image</span>
                     </div>
-                <div class="text">
-                    <h3><a href="/news/{{ article.id }}" class="title">{{ article.title|upper }}</a></h3>
-                    <div class="info">
-                        <p class="text">{{ article.excerpt|truncatewords:10}}</p>
-                        <p class="category"><small>Kategoria: {{ article.get_category_display }}</small></p>
-                        <div class="statistics">
-                            <p class="views"><span class="material-symbols-outlined">visibility</span> {{article.views}}</p>
-                            
-                            {# ULUBIONE #}
-                                <p class="favourite">
-                                    <a class="btn-ulubione" data-id="{{ article.id }}">
-                                        {% if article.id in user_ulubione_ids %}
-                                            <svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="#f00" stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                            </svg>
-                                        {% else %}
-                                            <svg id="heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="#CBCFD2" stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                            </svg>
-                                        {% endif %}
-                                    </a>
-                                    <span id="liczba-ulubione-{{ article.id }}"> {{ article.ulubione.count }}</span>
-                                </p>
-                        </div>
-                    </div>
+                {% endif %}
+                    <a class="btn-ulubione" data-id="{{ el.id }}" style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.5); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(5px); transition: 0.2s; text-decoration: none;">
+                        {% if el.id in user_ulubione_ids %}
+                            <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="#f00" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg>
+                        {% else %}
+                            <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill="#CBCFD2" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                            </svg>
+                        {% endif %}
+                    </a>
                 </div>
                 
                 {# WYŚWIETLANIE CENY #}
