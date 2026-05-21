@@ -59,11 +59,6 @@ HTML
     .listing-card:hover {
         background-color: #222222;
         transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(46, 46, 46, 0.2);
-    }
-
-    .listing-card:hover .ad-title {
-        color: #ca9eff !important;
     }
 
     .image-wrapper {
@@ -101,8 +96,6 @@ HTML
         margin-bottom: 0.5rem;
         transition: color 0.2s;
     }
-
-    .ad-title:hover { color: #e0bfff; }
 
     .ad-excerpt { color: #aaa; font-size: 0.95rem; line-height: 1.5; }
 
@@ -167,17 +160,17 @@ HTML
     }
 
     /* Fioletowy przycisk edycji pasujący do daButton */
-    .btn-edit { background-color: #ca9eff; color: black; }
-    .btn-edit:hover { background-color: #e0bfff; transform: scale(1.05); }
+    .btn-edit { background-color: transparent; color: rgb(224, 224, 224); border: 1px solid #967646; }
+    .btn-edit:hover {transform: scale(1.05); }
     
-    .btn-view { background-color: transparent; color: white; border: 1px solid #333; }
-    .btn-view:hover { background-color: #2d2d2d; border-color: #bb86fc; }
+    .btn-view { background-color: transparent; color: rgb(224, 224, 224); border: 1px solid #446e94; }
+    .btn-view:hover {transform: scale(1.05); }
 
-    .btn-delete { background-color: rgba(255, 51, 102, 0.1); color: #ff3366; border: 1px solid #ff3366; }
-    .btn-delete:hover { background-color: #ff3366; color: white; transform: scale(1.02); }
+    .btn-delete { background-color: transparent; color: rgb(224, 224, 224); border: 1px solid #914f4f; }
+    .btn-delete:hover {transform: scale(1.05); }
 
-    .btn-promote { background-color: #2b8a3e; color: white; }
-    .btn-promote:hover { background-color: #216a2f; }
+    .btn-promote { background-color: transparent; color: rgb(224, 224, 224); border: 1px solid #599953; }
+    .btn-promote:hover {transform: scale(1.05); }
 
     /* Serce z animacją z Twojej strony głównej */
     .heart-icon {
@@ -203,30 +196,30 @@ HTML
         <div class="stats-grid">
             <div class="stat-card">
                 <div><h3>Total Listings</h3><div class="value">{{ news|length }}</div></div>
-                <span class="material-symbols-outlined" style="color: #00d2ff; font-size: 40px; text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);">inventory_2</span>
+                <span class="material-symbols-outlined" style="color: #00d2ff; font-size: 40px;">inventory_2</span>
             </div>
             <div class="stat-card">
                 <div><h3>Total Views</h3><div class="value">{{ total_views_sum }}</div></div>
-                <span class="material-symbols-outlined" style="color: #00ff66; font-size: 40px; text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);">visibility</span>
+                <span class="material-symbols-outlined" style="color: #00ff66; font-size: 40px;">visibility</span>
             </div>
             <div class="stat-card">
                 <div><h3>Favorites</h3><div class="value">{{ total_favs_sum }}</div></div>
-                <span class="material-symbols-outlined" style="color: #ff3366; font-size: 40px; text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);">favorite</span>
+                <span class="material-symbols-outlined" style="color: #ff3366; font-size: 40px;">favorite</span>
             </div>
         </div>
 
         {% if news %}
             <div class="listings-wrapper">
                 {% for article in news %}
+                <a href="/news/{{ article.id }}">
                 <div class="listing-card" id="ad-{{ article.id }}">
                     <div class="image-wrapper">
                         <img class="listing-img" src="{% if article.image %}{{ article.image }}{% else %}{% static 'main/img/default_img.png' %}{% endif %}" alt="{{ article.title }}">
-                        <span class="status-badge">ACTIVE</span>
                     </div>
 
                     <div class="card-info">
                         <span class="category-tag">{{ article.get_category_display }}</span>
-                        <a href="/news/{{ article.id }}" class="ad-title">{{ article.title|upper }}</a>
+                        <a class="ad-title">{{ article.title|upper }}</a>
                         <p class="ad-excerpt">{{ article.excerpt|truncatewords:15 }}</p>
 
                         <div class="ad-stats">
@@ -251,6 +244,7 @@ HTML
                            <a href="https://www.facebook.com" target="_blank" class="btn-custom btn-promote"> udostępnij</a>
                         </div>
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
