@@ -3,8 +3,51 @@
 {% block title%}Settings{% endblock %}
 
 {% block content%}
+
+<style>
+    input[type="file"] {
+        background-color: #2d2d2d;
+        color: white;
+        border: none;
+    }
+    input[type="file"]::file-selector-button {
+        background-color: #4d4d4d;
+        color: white;
+        transition: all 0.2s ease;
+        border-right: none
+    }
+    input[type="file"]:hover::file-selector-button {
+        background-color: #3b3b3b !important;
+    }
+    #input_data::placeholder {
+    color: #666;
+    }
+    #input_data{
+        padding: 10px 10px; 
+        background-color: #2d2d2d; 
+        border: none; 
+        color: white; 
+        font-weight: 500;
+    }
+
+    #button{
+        width: 100%;
+        padding: 6px;
+        border-radius: 8px;
+        border: 1px solid #2d2d2d;
+        background-color: #4d4d4d;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    #button:hover{
+        transform: scale(1.02);
+        background-color: #2d2d2d
+    }
+    
+</style>
 <div class="container py-5" style="max-width: 600px">
-    <h2 class='mb-4 text-center'>Ustawienia konta</h2>
+    <h2 class='mb-4 text-center' style="font-weight: 800">Ustawienia konta</h2>
 
     {% if messages %}
         {% for message in messages %}
@@ -18,9 +61,9 @@
     <div class='row g-4 justify-content-center'>
         <!-- Zmiana zdjęcia profilowego -->
         <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Profile Picture</h5>
+            <div class="card shadow-sm" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
+                <div class="card-body" >
+                    <h5 class="card-title" style="color: white; font-weight: 700">Zdjęcie profilowe</h5>
 
                     <!-- podgląd aktualnego zdjęcia -->
                     {% if profile.avatar_url %}
@@ -37,10 +80,10 @@
                     <form method="post" action="{% url 'change_avatar' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label class="form-label">Choose a new picture</label>
-                            <input type="file" name="avatar" class="form-control" accept="image/*">
+                            <label class="form-label" style="color: #88888888; font-weight:500">Wybierz nowe zdjęcie</label>
+                            <input type="file" name="avatar" class="form-control" accept="image/*" class>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Change Picture</button>
+                        <button type="submit" id="button">Zmień zdjęcie</button>
                     </form>
                 </div>
             </div>
@@ -48,16 +91,15 @@
 
         <!-- Username change -->
         <div class="col-12">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
                 <div class="card-body">
-                    <h5 class='card-title'>Zmiana nazwy konta</h5>
+                    <h5 class='card-title' style="color: #88888888;">Zmiana nazwy konta</h5>
                     <form method='post' action="{% url 'change_username' %}">
                         {% csrf_token %}
-                        <div class="mb-3 form-floating">
-                            <input type="text" name="username" class="form-control" value="{{ request.user.username }}" required placeholder='Nowa nazwa użytkownika'>
-                            <label class="form-label">Nowa nazwa użytkownika</label>
+                        <div class="mb-3">
+                            <input type="text" name="username" class="form-control" value="{{ request.user.username }}" required placeholder='Nowa nazwa użytkownika' id="input_data">
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Zmień nazwę użytkownika</button>
+                        <button type="submit" id="button">Zmień nazwę użytkownika</button>
                     </form>
                 </div>
             </div>
@@ -65,24 +107,21 @@
 
         <!-- Password change -->
         <div class="col-12">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
                 <div class="card-body">
-                    <h5 class="card-title">Zmiana hasła</h5>
+                    <h5 class="card-title" style="color: #88888888;">Zmiana hasła</h5>
                     <form method="post" action="{% url 'change_password' %}">
                         {% csrf_token %}
-                        <div class="mb-3 form-floating">
-                            <input type="password" name="old_password" class="form-control" required placeholder='old password'>
-                            <label class="form-label">Stare hasło</label>
+                        <div class="mb-3">
+                            <input type="password" name="old_password" class="form-control" required placeholder='Stare hasło' id="input_data" >
                         </div>
-                        <div class="mb-3 form-floating">
-                            <input type="password" name="new_password1" class="form-control" required placeholder='new password'>
-                            <label class="form-label">Nowe hasło</label>
+                        <div class="mb-3">
+                            <input type="password" name="new_password1" class="form-control" required placeholder='Nowe hasło' id="input_data" >
                         </div>
-                        <div class="mb-3 form-floating">
-                            <input type="password" name="new_password2" class="form-control" required placeholder='new password'>
-                            <label class="form-label">Powtórz nowe hasło</label>
+                        <div class="mb-3">
+                            <input type="password" name="new_password2" class="form-control" required placeholder='Ponownie nowe hasło' id="input_data" >
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Zmień hasło</button>
+                        <button type="submit" id="button">Zmień hasło</button>
                     </form>
                 </div>
             </div>
@@ -90,12 +129,12 @@
 
         <!-- Delete account -->
         <div class="col-12">
-            <div class="card shadow-sm border-danger">
+            <div class="card shadow-sm border-danger" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
                 <div class="card-body">
                     <h5 class="card-title text-danger">Usunięcie konta</h5>
-                    <p class="text-muted small">Ta operacja jest nieodwracalna, czy jesteś pewien?</p>
+                    <p class=" small" style="color: #88888888;">Ta operacja jest nieodwracalna, czy jesteś pewien?</p>
                     <button class="btn btn-outline-danger w-100"
-                            data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            data-bs-toggle="modal" data-bs-target="#deleteModal" style="font-weight: 600;">
                         Usuń konto
                     </button>
                 </div>
@@ -107,21 +146,21 @@
 
 <!-- Confirm acc deletion -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered"> <!--using modaldialogcentered for centering the modal, delete if neccessary-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-danger">Delete account</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal-dialog modal-dialog-centered" > <!--using modaldialogcentered for centering the modal, delete if neccessary-->
+        <div class="modal-content" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px; color: #88888888; font-weight: 500">
+            <div class="modal-header" style="border-bottom: 1px solid #88888888" >
+                <h5 class=" text-danger" >Usuń konto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" style="color: #88888888;"></button>
             </div>
             <div class="modal-body">
-                <p>Do you really want to delete the account <strong>{{ request.user.username }}</strong>?</p>
+                <p>Czy napewno chcesz usunąć konto? <strong>{{ request.user.username }}</strong>?</p>
                 <form method="post" action="{% url 'delete_account' %}">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label class="form-label">Confirm with your password</label>
-                        <input type="password" name="password" class="form-control" required>
+                        <label class="form-label">Potwierdź wprowadzając hasło</label>
+                        <input type="password" name="password" class="form-control" required style=" background-color: #88888888 !important; border: none;">
                     </div>
-                    <button type="submit" class="btn btn-danger w-100">Yes, delete the account</button>
+                    <button type="submit" class="btn btn-danger w-100" style="font-weight: 600; color: black">Tak, usuń konto</button>
                 </form>
             </div>
         </div>
