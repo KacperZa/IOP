@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'main',
     'news',
     'forum',
-    'settings'
+    'settings',
+    'chat'
 ]
 
 MIDDLEWARE = [ # now default, used for verification/modification processing data from requests

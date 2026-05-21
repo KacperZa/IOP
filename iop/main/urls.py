@@ -21,6 +21,7 @@ urlpatterns = [
     path('regulamin', views.regulamin, name='regulamin'),
     path('privacy', views.privacy, name='privacy'),
     path('favourites', views.favourites, name='favourites'),
+    path('chat/', include('chat.urls')),
 
 ]
 
