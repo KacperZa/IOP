@@ -1,13 +1,36 @@
 {% extends 'main/layout/layout.html' %}
-
+{% load static %}
 {% block title %}{{ profile_user.username }} - Profil{% endblock %}
 
 {% block content %}
-<div class="container py-5" style="max-width: 800px;">
+
+<style>
+    a.badge {
+        transition: all .25s ease-in-out;
+    }
+    a.badge:hover {
+        transform: scale(1.05);
+    }
+    .card-body a.badge:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 6px rgba(202, 158, 255, 0.2) !important;
+    }
+    #card{
+        transition: all 0.3s ease;
+    }
+    #card:hover {
+        background-color: #222222 !important;
+        transform: translateY(-5px);
+        border-color: #ca9eff !important;
+        box-shadow: 0 10px 30px rgba(202, 158, 255, 0.2);
+    }
+</style>
+
+<div class="container py-5" style="border: none;max-width: 800px;">
 
     <!-- Karta profilu -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body d-flex align-items-center gap-4 p-4">
+    <div class="card mb-4 border-0"  style="border: 1px solid #444; overflow: hidden; border-radius: 12px; letter-spacing: 1px; background-color: transparent">
+        <div class="d-flex align-items-center gap-4 p-4" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
 
             <!-- Avatar -->
             {% if profile_user.profile.avatar_url %}
@@ -20,16 +43,21 @@
             {% endif %}
 
             <!-- Info -->
-            <div>
-                <h3 class="mb-1" style="color: black;">{{ profile_user.username }}</h3>
-                <p class="text-muted mb-2">
+            <div style="">
+                <h3 class="mb-1" style="color: white; font-size: 2rem; font-weight: 800;">{{ profile_user.username|upper }}</h3>
+                <p class="mb-2" style="color: #88888888; font-size: 1 rem; font-weight: 500;">
                     Dołączył: {{ profile_user.date_joined|date:"d.m.Y" }}
                 </p>
-                <span class="badge bg-primary">{{ articles_count }} ogłoszeń</span>
+                <span class="badge" style="padding: 10px; border: 1px solid #444">{{ articles_count }}  {% if articles_count >= 5 %}ogłoszeń {% else %} ogłoszenia {% endif %}</span>
+
+                            {% comment %} <div class="stat-card">
+                <div><h3>Favorites</h3><div class="value">{{ total_favs_sum }}</div></div>
+                <span class="material-symbols-outlined" style="color: #ff3366; font-size: 40px; text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);">favorite</span>
+            </div> {% endcomment %}
 
                 <!-- przycisk edycji tylko dla właściciela -->
                 {% if request.user == profile_user %}
-                    <a href="{% url 'settings' %}" class="btn btn-sm btn-outline-secondary ms-2">
+                    <a href="{% url 'settings' %}" class="badge" style="background-color: #e0bfff; color: black !important; text-decoration: none; border: 1px solid #444; color: white; padding: 10px;">
                         Edytuj profil
                     </a>
                 {% endif %}
@@ -45,16 +73,16 @@
         <div class="row g-3">
             {% for article in articles %}
                 <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        {% if article.image %}
-                            <img src="{{ article.image }}"
+                    <div  id="card" class="card h-100" style=" background-color: transparent; border: 1px solid #2d2d2d; border-radius: 12px; overflow: hidden;" >
+                        
+                            <img src="{% if article.image %}{{ article.image }}{% else %}{% static 'main/img/default_img.png' %}{% endif %}"
                                  class="card-img-top"
                                  style="height:160px; object-fit:cover;">
-                        {% endif %}
-                        <div class="card-body">
-                            <h6 class="card-title">{{ article.title }}</h6>
-                            <p class="card-text text-muted small">{{ article.excerpt }}</p>
-                            <a href="{% url 'news_detail' article.pk %}" class="btn btn-sm btn-primary">
+                        
+                        <div class="card-body" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 0 0 12px 12px;">
+                            <h6 class="card-title" style="color: white; font-weight: 600; font-size: 1.5rem;">{{ article.title }}</h6>
+                            <p class="card-text" style="color: #88888888; font-weight: 400;">{{ article.excerpt| truncatewords:5 }}</p>
+                            <a href="{% url 'news_detail' article.pk %}" class="badge" style="text-decoration: none; border: 1px solid #444; color: white; padding: 10px;">
                                 Zobacz
                             </a>
                         </div>
