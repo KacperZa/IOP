@@ -5,7 +5,7 @@ register = template.Library();
 @register.simple_tag
 def get_links():
     return [{
-        'name': 'Dom',
+        'name': 'Strona Główna',
         'href': '/',
         'icon': 'fa-house',
     }, {

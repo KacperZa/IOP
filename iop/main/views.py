@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages  
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
+from django.db.models import Sum  
 
 from news.models import Articles
 from news.models import Ulubione
@@ -33,13 +34,11 @@ def toggle_ulubione(request, ogloszenie_id):
 def index(request):
     articles = Articles.objects.all()
 
-
     search_query = request.GET.get('search')
     price_min = request.GET.get('price_min')
     price_max = request.GET.get('price_max')
     category_filter = request.GET.get('category')
     sort_by = request.GET.get('sort')
-
 
     if category_filter:
         articles = articles.filter(category=category_filter)
@@ -50,14 +49,12 @@ def index(request):
     if price_max:
         articles = articles.filter(price__lte=price_max)
 
-
     if sort_by == 'price_asc':
         articles = articles.order_by('price') 
     elif sort_by == 'price_desc':
         articles = articles.order_by('-price') 
     else:
         articles = articles.order_by('-published_at') 
-
 
     user_ulubione_ids = []
     if request.user.is_authenticated:
@@ -68,17 +65,32 @@ def index(request):
         'user_ulubione_ids': user_ulubione_ids
     })
 
+
+
 @never_cache
 @login_required
 def article(request):
-    values = Articles.objects.filter(autor = request.user).order_by('-published_at')
+    
+    values = Articles.objects.filter(autor=request.user).order_by('-published_at')
 
-    user_ulubione_ids = []
+    
+    total_views = values.aggregate(Sum('views'))['views__sum'] or 0
+
+    
+    total_favs = Ulubione.objects.filter(ogloszenie__autor=request.user).count()
+
+   
     user_ulubione_ids = list(
         request.user.ulubione.values_list('ogloszenie_id', flat=True)
     )
+
     print(values)
-    return render(request, "main/ogloszenia.html", {'news': values, 'user_ulubione_ids': user_ulubione_ids})
+    return render(request, "main/ogloszenia.html", {
+        'news': values, 
+        'user_ulubione_ids': user_ulubione_ids,
+        'total_views_sum': total_views,
+        'total_favs_sum': total_favs     
+    })
 
 
 def about(request):
@@ -137,3 +149,14 @@ def contact(request):
 
 def regulamin(request):
     return render(request, "main/regulamin.html")
+
+def privacy(request):
+    return render(request, "main/privacy.html")
+
+@login_required
+def favourites(request):
+    fav_ids = list(
+        request.user.ulubione.values_list('ogloszenie_id', flat=True)
+    )
+    news = Articles.objects.filter(id__in=fav_ids).order_by('-published_at')
+    return render(request, 'main/favourites.html', {'news': news, 'user_ulubione_ids': fav_ids})

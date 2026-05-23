@@ -7,7 +7,7 @@
   <div class="container-fluid">
 
     <a class="navbar-brand d-flex align-items-center" href="/">
-        <img src="{% static 'main/img/logo3.png' %}" alt="Logo IOP" height="48" class="me-2">
+        <img src="{% static 'main/img/Logo_IOP.png' %}" alt="Logo IOP" height="48" class="me-2">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Rozwiń nawigację">
       <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,9 @@
               <strong>{{ request.user.username }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li><li><a class="dropdown-item" href="{% url 'settings' %}">Ustawienia</a></li>
+              <li><a class="dropdown-item" href="{% url 'favourites' %}">Ulubione</a></li>
+              <li><a class="dropdown-item" href="{% url 'chat_inbox' %}">Wiadomości</a></li>
+              <li><a class="dropdown-item" href="{% url 'settings' %}">Ustawienia</a></li>
               <li><a class="dropdown-item" href="{% url 'user_profile' request.user.username %}">Profil</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>

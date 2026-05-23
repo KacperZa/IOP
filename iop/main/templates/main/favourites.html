@@ -8,9 +8,8 @@
     <div style="max-width: 1200px; margin: 0 auto;">
 
         <div style="margin-bottom: 40px;" class="header-text">
-            <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px;">Wszystkie
+            <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px;">Polubione
                 Ogłoszenia</h1>
-            <p style="color: #666;">Przeglądaj oferty na IOP</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px;">
@@ -87,29 +86,7 @@
         </div>
     </div>
 </div>
-<div class="pagination" style="margin-top: 20px; text-align: center;">
-    <span class="step-links">
-        {% if news.has_previous %}
-        <a href="?page={{ news.previous_page_number }}">poprzednia</a>
-        {% endif %}
-    </span>
 
-    <div class="page-numbers" style="margin-top: 10px;">
-        {% for i in news.paginator.page_range %}
-        {% if news.number == i %}
-        <b style="padding: 5px 10px; background: #aa54a4; border-radius: 3px;">{{ i }}</b>
-        {% else %}
-        <a href="?page={{ i }}" style="padding: 5px 10px;">{{ i }}</a>
-        {% endif %}
-        {% endfor %}
-    </div>
-
-    <span class="step-links">
-        {% if news.has_next %}
-        <a href="?page={{ news.next_page_number }}">następna</a>
-        {% endif %}
-    </span>
-</div>
 <script>
 
     document.addEventListener("DOMContentLoaded", (event) => {
@@ -219,8 +196,6 @@
 .category-card .name {
     text-decoration: none !important;
 }
-
-
     /* ANIMACJA SERCA */
     .heart-icon {
         width: 24px;
@@ -236,62 +211,6 @@
 
     .btn-ulubione:hover .heart-icon {
         transform: scale(1.2);
-    }
-
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        margin: 40px 0;
-        font-family: sans-serif;
-    }
-
-    .pagination a,
-    .pagination b {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 40px;
-        height: 40px;
-        padding: 0 10px;
-        border-radius: 8px;
-        /* Lekkie zaokrąglenie kwadratów */
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-size: 14px;
-    }
-
-
-    .pagination a {
-        background-color: #1a1a1a;
-        /* Ciemne tło pasujące do kart */
-        color: #ffffff;
-        border: 1px solid #333;
-    }
-
-
-    .pagination a:hover {
-        background-color: #2d2d2d;
-        border-color: #bb86fc;
-        /* Fioletowa obwódka */
-    }
-
-
-    .pagination b {
-        background-color: #bb86fc;
-        /* Kolor Twoich przycisków i plakietek */
-        color: #000000;
-        border: 1px solid #bb86fc;
-        font-weight: bold;
-    }
-
-
-    .current-info {
-        color: #888;
-        margin-right: 15px;
-        font-size: 14px;
     }
 </style>
 {% endblock %}
