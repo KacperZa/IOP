@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap5',
 
     # custom apps
     'main',
@@ -61,6 +63,9 @@ INSTALLED_APPS = [
     'settings',
     'chat'
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [ # now default, used for verification/modification processing data from requests
     'django.middleware.security.SecurityMiddleware',
