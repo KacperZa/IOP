@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.db.models import Sum  
 
+from settings.forms import RegisterForm
 from news.models import Articles
 from news.models import Ulubione
 
@@ -126,16 +127,15 @@ def register(request):
         return redirect("home")
 
     if request.method == "POST":
-        user = User.objects.create_user(
-            request.POST["username"], request.POST["email"], request.POST["password"]
-        )
-        user.profile.gender = request.POST["gender"]
-        user.profile.age = request.POST["age"]
-        user.profile.save()
-        login(request, user)
-        return redirect("home")
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+    else:
+        form = RegisterForm()
 
-    return render(request, "main/users/register.html")
+    return render(request, "main/users/register.html", {'form': form})
 
 
 def logout_user(request):
