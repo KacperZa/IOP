@@ -11,11 +11,11 @@ def get_links():
     }, {
         'name': 'Moje ogłoszenia',
         'href': '/cars',
-        'icon': 'fa-car',
+        'icon': 'fa-book-open',
     },{
         'name': 'Ogłoszenia',
         'href': '/news/',
-        'icon': 'fa-newspaper',
+        'icon': 'fa-inbox',
     },{
         'name': 'Dodaj ogłoszenie',
         'href': '/news/create',
