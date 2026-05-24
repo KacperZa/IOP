@@ -25,6 +25,12 @@ class RegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'class': 'form-control discord-input', 'placeholder':''})
         }
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('Użytkownik o takiej nazwie już istnieje.')
+        return username
+
     def clean_password(self):
         password = self.cleaned_data.get('password')
         if not re.match(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$', password):
@@ -35,6 +41,8 @@ class RegisterForm(forms.ModelForm):
     
     def clean_email(self):
         email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Konto z tym adresem email już istnieje.')
         if not re.match(r'^[\w\.-]+@[\w\.-]+\.[A-Za-z]{2,}$', email):
             raise forms.ValidationError(
                 "Podaj prawidłowy adres email, np. jan@gmail.com."
