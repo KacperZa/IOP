@@ -15,14 +15,14 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput, label='Potwierdź hasło')
     email = forms.CharField(
-        widget=forms.EmailInput(attrs={'class': 'form-control discord-input', 'placeholder':'Email'})
+        widget=forms.EmailInput(attrs={'class': 'form-control discord-input', 'placeholder':''})
     )
 
     class Meta: 
         model = User
         fields = ['username']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control discord-input', 'placeholder':'Nazwa użytkownika'})
+            'username': forms.TextInput(attrs={'class': 'form-control discord-input', 'placeholder':''})
         }
 
     def clean_password(self):
