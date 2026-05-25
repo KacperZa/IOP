@@ -80,7 +80,7 @@
                     <form method="post" action="{% url 'change_avatar' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label class="form-label" style="color: #88888888; font-weight:500">Wybierz nowe zdjęcie</label>
+                            <label class="form-label" style="color: white; font-weight:500">Wybierz nowe zdjęcie</label>
                             <input type="file" name="avatar" class="form-control" accept="image/*" class>
                         </div>
                         <button type="submit" id="button">Zmień zdjęcie</button>
@@ -93,7 +93,7 @@
         <div class="col-12">
             <div class="card shadow-sm" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
                 <div class="card-body">
-                    <h5 class='card-title' style="color: #88888888;">Zmiana nazwy konta</h5>
+                    <h5 class='card-title' style="color: white;">Zmiana nazwy konta</h5>
                     <form method='post' action="{% url 'change_username' %}">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -109,7 +109,7 @@
         <div class="col-12">
             <div class="card shadow-sm" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px;">
                 <div class="card-body">
-                    <h5 class="card-title" style="color: #88888888;">Zmiana hasła</h5>
+                    <h5 class="card-title" style="color: white;">Zmiana hasła</h5>
                     <form method="post" action="{% url 'change_password' %}">
                         {% csrf_token %}
                         <div class="mb-3">
@@ -150,7 +150,7 @@
         <div class="modal-content" style="background-color: #1a1a1a; border: 1px solid #2d2d2d; border-radius: 12px; color: #88888888; font-weight: 500">
             <div class="modal-header" style="border-bottom: 1px solid #88888888" >
                 <h5 class=" text-danger" >Usuń konto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" style="color: #88888888;"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" style="color: #88888888;"></button>
             </div>
             <div class="modal-body">
                 <p>Czy napewno chcesz usunąć konto? <strong>{{ request.user.username }}</strong>?</p>

@@ -1,0 +1,10 @@
+{% autoescape off %}
+Witaj {{username}}!
+
+Aktywuj konto klikając w link poniżej: 
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+
+Wiadomość generowana automatycznie — prosimy na nią nie odpowiadać.
+
+{% endautoescape %}
