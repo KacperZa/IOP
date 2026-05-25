@@ -60,12 +60,12 @@
               {% endif %}
 
                     <div class="form-label discord-label {% if form.password.errors %} error{% endif %}" style="{% if form.password.errors %} color: #ff7272 !important;{% endif %}">
-                      Hasło musi mieć min.:
+                      Hasło powinno zawierać co najmniej 8 znaków w tym jeden znak z każdej z następujących grup:
                       <ul>
-                        <li>8 znaków,</li>
-                        <li>jedną wielką literę,</li>
-                        <li>jedną małą literę,</li>
-                        <li>jedną cyfrę.</li>
+                        <li>Małe litery</li>
+                        <li>Duże litery</li>
+                        <li>Cyfry</li>
+                        <li>Znaki specjalne</li>
                       </ul>
                     </div> 
             </div>
