@@ -14,15 +14,12 @@ class AvatarForm(forms.Form):
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput, label='Potwierdź hasło')
-    email = forms.CharField(
-        widget=forms.EmailInput(attrs={'class': 'form-control discord-input', 'placeholder':''})
-    )
-
     class Meta: 
         model = User
-        fields = ['username']
+        fields = ['username', 'email']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control discord-input', 'placeholder':''})
+            'username': forms.TextInput(attrs={'class': 'form-control discord-input', 'placeholder':''}),
+            'email': forms.EmailInput(attrs={'class': 'form-control discord-input', 'placeholder':''})
         }
 
     def clean_username(self):
@@ -33,7 +30,7 @@ class RegisterForm(forms.ModelForm):
 
     def clean_password(self):
         password = self.cleaned_data.get('password')
-        if not re.match(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$', password):
+        if not re.match(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$', password):
             raise forms.ValidationError(
                 "Hasło musi mieć min. 8 znaków, jedną wielką literę, jedną małą literę i cyfrę."
             )
@@ -57,6 +54,7 @@ class RegisterForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
+        user.email = self.cleaned_data['email']
         if commit: 
             user.save()
         return user
