@@ -61,3 +61,25 @@
     </div>
   </div>
 </nav>
+
+{%if messages %}
+
+  {% for message in messages %}
+    <div class="alert  alert-dismissible fade show " role="alert" style="background-color: #405d2b;">
+      <div style="display: flex; justify-content: center; align-items:center; gap: 0.2rem">
+        <strong>Juhuuu!</strong> {{ message }}
+      </div>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close">
+      </button>
+    </div>
+  {% endfor %}
+{% endif %} 
+
+{% if show_verify_banner %}
+  <div class="alert  alert-dismissible fade show " role="alert" style="background-color: #2b1818;">
+    <div style="display: flex; justify-content: center; align-items:center; gap: 0.2rem">
+      <strong>Zweryfikuj konto!</strong> Sprawdź pocztę <strong>{{ verify_email }}</strong> i kliknij w link aktywujący konto by odblokować cały potencjał strony.  <strong>PS. Sprawdź folder SPAM.</strong>
+    </div>
+    </button>
+  </div>
+{% endif %}
