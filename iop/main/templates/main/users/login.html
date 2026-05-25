@@ -1,6 +1,6 @@
 {% extends 'main/layout/clean_layout.html' %}
  
-{% block title%}Log in{% endblock %}
+{% block title%}Zaloguj się{% endblock %}
  
 {% block content%}
 
@@ -24,16 +24,16 @@
             {% csrf_token %}
 
             <div class="mb-3">
-              <label for="username" class="form-label discord-label">Username</label>
-              <input type="text" class="form-control discord-input" id="username" name="username" aria-describedby="username" required>
+              <label for="email" class="form-label discord-label">E-mail</label>
+              <input type="text" class="form-control discord-input" id="email" name="email" aria-describedby="email" required>
             </div>
 
             <div class="mb-4">
-              <label for="password" class="form-label discord-label">Password</label>
+              <label for="password" class="form-label discord-label">Hasło</label>
               <input type="password" class="form-control discord-input" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn btn-discord w-100">Log in</button>
+            <button type="submit" class="btn btn-discord w-100">Zaloguj się</button>
         </form>
     </div>
 </div>
