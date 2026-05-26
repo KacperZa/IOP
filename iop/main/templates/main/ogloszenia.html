@@ -5,14 +5,6 @@
 
 {% block content %}
 <style>
-    Oto gotowy, przerobiony kod CSS przygotowany specjalnie pod markę RA BUZZ.
-
-Wszystkie niebieskie akcenty (#4c6ef5) zamieniłem na Twój markowy, jaskrawy fiolet (#ca9eff), a szare tła kart zastąpiłem głęboką czernią/ciemnym grafitem pasującym do strony głównej.
-
-Podmień całą sekcję <style> w swoim pliku na tę poniższą:
-
-HTML
-<style>
     /* Główny kontener strony - dopasowany do ciemnego motywu */
     .listings-body {
         background-color: #121212;
@@ -190,20 +182,20 @@ HTML
 
 <div class="listings-body">
     <div class="container">
-        <h1 class="text-white fw-bold mb-1 text-start">My Listings</h1>
+        <h1 class="text-white fw-bold mb-1 text-start">Moje ogłoszenia</h1>
         <p class="text-secondary mb-5">Zarządzaj swoimi aktywnymi ogłoszeniami i śledź statystyki popularności.</p>
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div><h3>Total Listings</h3><div class="value">{{ news|length }}</div></div>
+                <div><h3>Wszystkie ogłoszenia</h3><div class="value">{{ news|length }}</div></div>
                 <span class="material-symbols-outlined" style="color: #00d2ff; font-size: 40px;">inventory_2</span>
             </div>
             <div class="stat-card">
-                <div><h3>Total Views</h3><div class="value">{{ total_views_sum }}</div></div>
+                <div><h3>Wszystkie wyświetlenia</h3><div class="value">{{ total_views_sum }}</div></div>
                 <span class="material-symbols-outlined" style="color: #00ff66; font-size: 40px;">visibility</span>
             </div>
             <div class="stat-card">
-                <div><h3>Favorites</h3><div class="value">{{ total_favs_sum }}</div></div>
+                <div><h3>Ulubione</h3><div class="value">{{ total_favs_sum }}</div></div>
                 <span class="material-symbols-outlined" style="color: #ff3366; font-size: 40px;">favorite</span>
             </div>
         </div>
