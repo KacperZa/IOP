@@ -4,6 +4,28 @@
 
 {% block content%}
 
+<style>
+  #register_link{
+    position: relative
+  }
+  #register_link::after{
+    content: "";
+    position: absolute;
+    height: 0.08rem;
+    width: 100%;
+    background-color: #666;
+    left: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s linear;
+  }
+  #register_link:hover:after{
+    transform-origin: left;
+    transform: scaleX(1)
+  }
+</style>
+
 <div class="d-flex align-items-center justify-content-center px-4" style="height: 100vh;">
 
   <div
@@ -71,6 +93,8 @@
             <li>Znaki specjalne</li>
           </ul>
         </div>
+        <p class=" p-2 discord-label">Masz konto? Zaloguj się <a href="{% url 'login_user' %}" class="discord-label"  id="register_link" style=" text-decoration:none; color:  #855fbb !important;">tutaj</a>!</p>
+
       </div>
 
       <button type="submit" class="btn btn-discord w-100">Zarejestruj się</button>
