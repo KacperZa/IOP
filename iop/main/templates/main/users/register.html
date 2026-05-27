@@ -1,78 +1,81 @@
 {% extends 'main/layout/clean_layout.html' %}
- 
+
 {% block title%}Rejestracja{% endblock %}
- 
+
 {% block content%}
 
 <div class="d-flex align-items-center justify-content-center px-4" style="height: 100vh;">
-    
-    <div style="max-width: 480px; background-color: #313338; padding: 32px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);" class="w-100">
-        
-        <h2 class="text-center mb-4" style="color: #f2f3f5; font-weight: 600; font-size: 24px;">Załóż konto</h2>
-        
-        <form method="POST" action="/register" novalidate>
-            {% csrf_token %}
 
-            <div class="mb-3">
-              <label for="username" class="form-label discord-label">Nazwa użytkownika</label>
-              {{ form.username }}
-            </div>
+  <div
+    style="max-width: 480px; background-color: #313338; padding: 32px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.2);"
+    class="w-100">
 
-              {% if form.username.errors %}
-                {% for error in form.username.errors %}
-                <div class="form-label discord-label error" style="color: #ff7272 !important; margin-bottom: 1rem !important;">
-                  {{ error }}
-                </div>
-                {% endfor %}
-              {% endif %}
+    <h2 class="text-center mb-4" style="color: #f2f3f5; font-weight: 600; font-size: 24px;">Załóż konto</h2>
 
-            <div class="mb-3">
-              <label for="email" class="form-label discord-label">Adres e-mail</label>
-              {{ form.email }}
-            </div>
-              {% if form.email.errors %}
-                {% for error in form.email.errors %}
-                <div class="form-label discord-label error" style="color: #ff7272 !important; margin-bottom: 1rem !important;">
-                  {{ error }}
-                </div>
-                {% endfor %}
-              {% endif %}
-            
-            <div class="mb-3">
-              <label for="password" class="form-label discord-label">Hasło</label>
-              <input type="password" class="form-control discord-input" id="password" name="password" required>
-            </div>
-            
-            <div class="mb-4">
-              <label for="password2" class="form-label discord-label">Powtórz hasło</label>
-              <input type="password" class="form-control discord-input" id="password2" name="password2" required>
-            </div>
+    <form method="POST" action="/register" novalidate>
+      {% csrf_token %}
 
-            
-            {% comment %} Wypisywanie błędów {% endcomment %}
-            <div style="margin-bottom: 1.5rem;">
-              {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                <div class="form-label discord-label error " style="color: #ff7272 !important; margin-bottom: 1rem !important;">
-                  {{ error }}
-                </div>
-                {% endfor %}
-              {% endif %}
+      <div class="mb-3">
+        <label for="username" class="form-label discord-label">Nazwa użytkownika</label>
+        {{ form.username }}
+      </div>
 
-                    <div class="form-label discord-label {% if form.password.errors %} error{% endif %}" style="{% if form.password.errors %} color: #ff7272 !important;{% endif %}">
-                      Hasło powinno zawierać co najmniej 8 znaków w tym jeden znak z każdej z następujących grup:
-                      <ul>
-                        <li>Małe litery</li>
-                        <li>Duże litery</li>
-                        <li>Cyfry</li>
-                        <li>Znaki specjalne</li>
-                      </ul>
-                    </div> 
-            </div>
+      {% if form.username.errors %}
+      {% for error in form.username.errors %}
+      <div class="form-label discord-label error" style="color: #ff7272 !important; margin-bottom: 1rem !important;">
+        {{ error }}
+      </div>
+      {% endfor %}
+      {% endif %}
 
-            <button type="submit" class="btn btn-discord w-100">Zarejestruj się</button>
-        </form>
-    </div>
+      <div class="mb-3">
+        <label for="email" class="form-label discord-label">Adres e-mail</label>
+        {{ form.email }}
+      </div>
+      {% if form.email.errors %}
+      {% for error in form.email.errors %}
+      <div class="form-label discord-label error" style="color: #ff7272 !important; margin-bottom: 1rem !important;">
+        {{ error }}
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <div class="mb-3">
+        <label for="password" class="form-label discord-label">Hasło</label>
+        <input type="password" class="form-control discord-input" id="password" name="password" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="password2" class="form-label discord-label">Powtórz hasło</label>
+        <input type="password" class="form-control discord-input" id="password2" name="password2" required>
+      </div>
+
+
+      {% comment %} Wypisywanie błędów {% endcomment %}
+      <div style="margin-bottom: 1.5rem;">
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <div class="form-label discord-label error " style="color: #ff7272 !important; margin-bottom: 1rem !important;">
+          {{ error }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="form-label discord-label {% if form.password.errors %} error{% endif %}"
+          style="{% if form.password.errors %} color: #ff7272 !important;{% endif %}">
+          Hasło powinno zawierać co najmniej 8 znaków w tym jeden znak z każdej z następujących grup:
+          <ul>
+            <li>Małe litery</li>
+            <li>Duże litery</li>
+            <li>Cyfry</li>
+            <li>Znaki specjalne</li>
+          </ul>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-discord w-100">Zarejestruj się</button>
+    </form>
+  </div>
 </div>
 
 <script>
@@ -80,14 +83,14 @@
   console.log(document.querySelectorAll('.error'))
   document.addEventListener("DOMContentLoaded", (event) => {
     gsap.to('.error', {
-      x:30,
+      x: 30,
       duration: 0.2,
-      repeat: 5, 
+      repeat: 5,
       yoyo: true,
     })
 
- });
+  });
 
 </script>
- 
+
 {% endblock %}
