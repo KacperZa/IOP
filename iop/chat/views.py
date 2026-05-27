@@ -37,7 +37,7 @@ def conversation(request, conv_id):
 
     return render(request, 'chat/conversation.html', {
         'conv': conv,
-        'messages': messages,
+        'userMessages': messages,
         'other_user': other_user,
     })
 
