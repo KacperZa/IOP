@@ -274,6 +274,7 @@ document.querySelectorAll('.btn-ulubione').forEach(function(btn) {
                 }
             });     
         });
+
         
         gsap.fromTo('.category-header', {
             x: -40,
@@ -283,7 +284,7 @@ document.querySelectorAll('.btn-ulubione').forEach(function(btn) {
             x: 0,
             opacity: 1,
             duration: 0.8,
-            ease: "back.in"
+            ease: "power2.out"
         }
         );
         gsap.fromTo('.articles-header', {
@@ -294,7 +295,7 @@ document.querySelectorAll('.btn-ulubione').forEach(function(btn) {
             x: 0,
             opacity: 1,
             duration: 0.8,
-            ease: "back.in"
+            ease: "power2.out"
         }
         );
 
