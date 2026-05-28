@@ -52,8 +52,12 @@
           </div>
         {% else %}
           <div class="d-flex gap-2">
-            <a class="btn btn-primary" href="/login">Zaloguj się</a>
-            <a class="btn btn-info text-white" href="/register">Zarejestruj się</a>
+            <a class="daButton secondary" href="/login" style="padding: 8px 16px; text-decoration: none; font-size: 14px; border-radius: 10px;">
+                <span class="material-symbols-outlined" style="font-size: 18px; margin-right: 5px; vertical-align: middle;">login</span>Zaloguj się
+            </a>
+            <a class="daButton" href="/register" style="padding: 8px 16px; text-decoration: none; font-size: 14px; border-radius: 10px;">
+                <span class="material-symbols-outlined" style="font-size: 18px; margin-right: 5px; vertical-align: middle;">person_add</span>Zarejestruj się
+            </a>
           </div>
         {% endif %}
       </div>
@@ -62,8 +66,7 @@
   </div>
 </nav>
 
-{%if messages %}
-
+{% if messages %}
   {% for message in messages %}
     <div class="alert  alert-dismissible fade show " role="alert" style="background-color: #405d2b;">
       <div style="display: flex; justify-content: center; align-items:center; gap: 0.2rem">
@@ -80,6 +83,5 @@
     <div style="display: flex; justify-content: center; align-items:center; gap: 0.2rem">
       <strong>Zweryfikuj konto!</strong> Sprawdź pocztę <strong>{{ verify_email }}</strong> i kliknij w link aktywujący konto by odblokować cały potencjał strony.  <strong>PS. Sprawdź folder SPAM.</strong>
     </div>
-    </button>
   </div>
 {% endif %}
