@@ -15,7 +15,7 @@
             <div style="font-weight:700;">{{ other_user.username }}</div>
             {% if conv.article %}
             <div style="font-size:12px; color:#ca9eff;">
-                <a href="{{ conv.article.get_absolute_url }}" style="color:#ca9eff; text-decoration:none;">{{ conv.article.title }}</a>
+                <a href="{{ conv.article.get_absolute_url }}" style="color:#ac88d8; text-decoration:none;">{{ conv.article.title }}</a>
             </div>
             {% endif %}
         </div>
@@ -24,7 +24,7 @@
     <div id="messagesContainer" style="flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; max-width:700px; width:100%; margin:0 auto;">
         {% for msg in userMessages %}
         <div class="msg-bubble" data-id="{{ msg.id }}" style="display:flex; justify-content:{% if msg.sender == request.user %}flex-end{% else %}flex-start{% endif %};">
-            <div style="max-width:70%; background:{% if msg.sender == request.user %}#ca9eff{% else %}#1a1a1a{% endif %}; color:{% if msg.sender == request.user %}#000{% else %}#fff{% endif %}; padding:10px 14px; border-radius:16px; font-size:14px; line-height:1.5;">
+            <div style="max-width:70%; background:{% if msg.sender == request.user %}#ac88d8{% else %}#1a1a1a{% endif %}; color:{% if msg.sender == request.user %}#000{% else %}#fff{% endif %}; padding:10px 14px; border-radius:16px; font-size:14px; line-height:1.5;">
                 {{ msg.body }}
                 <div style="font-size:11px; opacity:0.6; margin-top:4px; text-align:right;">{{ msg.created_at|date:"H:i" }}</div>
             </div>
@@ -37,7 +37,7 @@
             <textarea id="messageInput" rows="1" placeholder="Napisz wiadomość..."
                 style="flex:1; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:12px; padding:12px 14px; color:#fff; font-size:14px; resize:none; outline:none; line-height:1.5;"></textarea>
             <button onclick="sendMessage()" 
-                style="background:#ca9eff; color:#000; border:none; border-radius:12px; padding:0 20px; font-weight:800; cursor:pointer; font-size:18px;">↑</button>
+                style="background:#926bc2; color:#000; border:none; border-radius:12px; padding:0 20px; font-weight:600; cursor:pointer; font-size:14px;">Wyślij</button>
         </div>
     </div>
 </div>
@@ -60,7 +60,7 @@ function addBubble(msg) {
     div.dataset.id = msg.id;
     div.style.cssText = `display:flex; justify-content:${isMine ? 'flex-end' : 'flex-start'};`;
     div.innerHTML = `
-        <div style="max-width:70%; background:${isMine ? '#ca9eff' : '#1a1a1a'}; color:${isMine ? '#000' : '#fff'}; padding:10px 14px; border-radius:16px; font-size:14px; line-height:1.5;">
+        <div style="max-width:70%; background:${isMine ? '#ac88d8' : '#1a1a1a'}; color:${isMine ? '#000' : '#fff'}; padding:10px 14px; border-radius:16px; font-size:14px; line-height:1.5;">
             ${msg.body}
             <div style="font-size:11px; opacity:0.6; margin-top:4px; text-align:right;">${msg.created_at}</div>
         </div>`;
