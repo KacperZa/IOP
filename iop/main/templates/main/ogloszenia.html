@@ -182,8 +182,8 @@
 
 <div class="listings-body">
     <div class="container">
-        <h1 class="text-white fw-bold mb-1 text-start">Moje ogłoszenia</h1>
-        <p class="text-secondary mb-5">Zarządzaj swoimi aktywnymi ogłoszeniami i śledź statystyki popularności.</p>
+        <h1 id="title" class="text-white fw-bold mb-1 text-start">Moje ogłoszenia</h1>
+        <p  id="title" class="text-secondary mb-5">Zarządzaj swoimi aktywnymi ogłoszeniami i śledź statystyki popularności.</p>
 
         <div class="stats-grid">
             <div class="stat-card">
@@ -225,7 +225,7 @@
                                 <span id="liczba-ulubione-{{ article.id }}">{{ article.ulubione.count }}</span>
                             </span>
                         </div>
-                    </div>
+                      </div>
 
                     <div class="action-panel">
                         <div class="price-display">{{ article.price }} zł</div>
@@ -241,8 +241,8 @@
                 {% endfor %}
             </div>
         {% else %}
-            <div class="text-center p-5 bg-dark rounded border border-secondary">
-                <p class="text-secondary fs-5">Nie masz jeszcze żadnych ogłoszeń.</p>
+            <div id="no-listings-container" class="text-center p-5 bg-dark rounded border border-secondary">
+                <p id="no-listings-text" class="text-secondary fs-5">Nie masz jeszcze żadnych ogłoszeń.</p>
                 <a href="/news/create" class="btn btn-primary px-4 py-2">Dodaj ogłoszenie</a>
             </div>
         {% endif %}
@@ -252,13 +252,31 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         
-        gsap.from('.listing-card', {
+        gsap.from('#title', {
             x: -40,
             opacity: 0,
             stagger: 0.12,
             duration: 0.8,
             ease: "power2.out"
         });
+
+
+        gsap.from('.stat-card', {
+            x: -40,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+
+        gsap.from('#no-listings-container', {
+            x: -40,
+            opacity: 0,
+            stagger: 0.12,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+
 
         
         document.querySelectorAll('.btn-ulubione').forEach(btn => {
