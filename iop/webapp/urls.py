@@ -1,15 +1,14 @@
-# Główny plik URL projektu 
+# Główny plik URL projektu
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('main.urls')),
-    path('news/', include('news.urls')), 
-    path('forum/', include('forum.urls')),
-    path('usersettings/', include('settings.urls'))
+    path("admin/", admin.site.urls),
+    path("", include("main.urls")),
+    path("news/", include("news.urls")),
+    path("usersettings/", include("settings.urls")),
 ]
 
 # To dodaje obsługę plików statycznych ORAZ zdjęć
