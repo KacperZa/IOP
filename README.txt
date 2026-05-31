@@ -34,4 +34,4 @@ Następnie wrzucamy tam plik .env (klucze baz danych, plik powinien być w posia
 
 ### 5. Uruchomienie projektu
 W folderze iop aktywujemy projekt: 
-- Python manage.py runserver
+- python manage.py runserver
