@@ -15,7 +15,7 @@ Postępuj zgodnie z poniższymi instrukcjami, aby uruchomić aplikację na swoim
 ### 1. Pobierz repozytorium
 Stwórz pusty folder i  otwórz na nim bash gita a następnie po koleji:
 - git clone https://github.com/KacperZa/IOP
-- cd IOP
+- Zamknij basha, otwórz edytor a następnie w terminalu (w folderze IOP)
 
 ### 2. Utwórz środowisko wirtualne (venv)
 Teraz tworzymy venva, wewnątrz folderu z projektem (IOP):
